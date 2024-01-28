@@ -4,10 +4,22 @@
 
 //class
 #include"BaseObj.h"
+#include"Camela.h"
 
-class player{
+class Player:public BaseObj{
 
+private:
 
+	bool isDeath_;
+
+public:
+
+	Player();
+
+	void Init();
+	void Update(Camela& camela);
+    void RenderingPipeline(Camela& camela)override;
+	void Draw();
 
 };
 

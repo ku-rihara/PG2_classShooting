@@ -14,6 +14,7 @@ public:
 	Vector2 acceleration_;
 	Vector2 scale_;
 	Vector2 size_;
+	float theta_;
 
 	//頂点とマトリックス
 	Vertex vertexPos_;
@@ -26,8 +27,8 @@ public:
 	//コンストラクタ
 	BaseObj();
 
-	virtual void RenderingPipeline();
-	virtual void CamelaTransform();
+	virtual void RenderingPipeline(Camela&camela);
+	
 
 };
 

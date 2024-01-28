@@ -1,5 +1,12 @@
 #include <Novice.h>
 
+#include"struct.h"
+
+//class
+#include"player.h"
+#include"Camela.h"
+
+
 const char kWindowTitle[] = "LC1A_12_クリハラ_ケイタ_タイトル";
 
 // Windowsアプリでのエントリーポイント(main関数)
