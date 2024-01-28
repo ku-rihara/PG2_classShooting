@@ -4,7 +4,7 @@
 
 //class
 #include"BaseObj.h"
-#include"Camela.h"
+
 
 class Player:public BaseObj{
 
@@ -12,13 +12,16 @@ private:
 
 	bool isDeath_;
 
+	GH texture_;
+
 public:
 
 	Player();
 
-	void Init();
-	void Update(Camela& camela);
-    void RenderingPipeline(Camela& camela)override;
+	void Init()override;
+	void Update(char *keys,char *preKeys);
+	void NoGravityMove(Vector2& pos, Vector2& speed,char* keys);
+    void RenderingPipeline()override;
 	void Draw();
 
 };

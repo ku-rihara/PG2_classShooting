@@ -1,11 +1,21 @@
 ﻿#pragma once
+#include<Novice.h>
 
 #include"struct.h"
+
+//Function
+#include"Matrix3x3.h"
+#include"Function.h"
+
 //class
 #include"Camela.h"
 
 class BaseObj{
-public:
+protected:
+
+	//包含
+	Camela* camela_;
+
 	//座標
 	Vector2 worldPos_;
 
@@ -17,7 +27,6 @@ public:
 	float theta_;
 
 	//頂点とマトリックス
-	Vertex vertexPos_;
 	Vertex screenVertex_;
 	Vertex localVertex_;
 	Matrix3x3 matrix_;
@@ -27,8 +36,11 @@ public:
 	//コンストラクタ
 	BaseObj();
 
-	virtual void RenderingPipeline(Camela&camela);
+	virtual void Init();
+	virtual void RenderingPipeline();
 	
+	Vector2 GetWorldPos()const { return worldPos_; }
+
 
 };
 

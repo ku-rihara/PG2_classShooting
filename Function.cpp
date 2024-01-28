@@ -67,6 +67,22 @@ float Dot(Vector2 obj1, Vector2 obj2) {
 	return obj1.x * obj2.x + obj1.y * obj2.y;
 }
 
+Vertex MakeLoalVertex(Vector2 size) {
+
+	Vertex vertex;
+
+	vertex.LeftTop.x = size.x;
+	vertex.RightTop.x = size.x;
+	vertex.LeftBottom.x = size.x;
+	vertex.RightBottom.x = size.x;
+	vertex.LeftTop.y = size.y;
+	vertex.RightTop.y = size.y;
+	vertex.LeftBottom.y = size.y;
+	vertex.RightBottom.y = size.y;
+
+	return vertex;
+}
+
 void newDrawQuad(Vertex VerTex, float startx, float starty, float DrawWidth, float DrawHeigth, int Handle, int Color) {
 
 	Novice::DrawQuad(int(VerTex.LeftTop.x), int(VerTex.LeftTop.y), int(VerTex.RightTop.x), int(VerTex.RightTop.y), int(VerTex.LeftBottom.x), int(VerTex.LeftBottom.y), int(VerTex.RightBottom.x), int(VerTex.RightBottom.y), int(startx), int(starty), int(DrawWidth), int(DrawHeigth), Handle, Color);

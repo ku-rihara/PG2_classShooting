@@ -23,12 +23,10 @@ public:
 	Camela();
 	void Init();
 	void MakeCamelaMatrix();
-	void ZoomOut();
-	void ZoomIn();
+	/*void ZoomOut();
+	void ZoomIn();*/
 
 	//getter
-
-
 	Matrix3x3 GetWorldMatrix()const { return worldMatrix_; }
 	Matrix3x3 GetViewMatrix()const { return viewMatrix_; }
 	Matrix3x3 GetOrthoMatrix()const { return orthoMatrix_; }

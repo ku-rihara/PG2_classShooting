@@ -15,7 +15,8 @@ float Clamp(float n, float min, float max);
 
 float Dot(Vector2 obj1,Vector2 obj2);
 
-void newDrawQuad(Vertex VerTex, float startx, float starty, float DrawWidth, float DrawHeigth, int Handle, int Color);
+Vertex MakeLoalVertex(Vector2 size);
 
+void newDrawQuad(Vertex VerTex, float startx, float starty, float DrawWidth, float DrawHeigth, int Handle, int Color);
 
 void  CircleColligion(Vector2 posA, Vector2 posB, float radA, float radB, bool& isColligion);

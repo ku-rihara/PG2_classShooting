@@ -1,35 +1,32 @@
 ﻿#include<Novice.h>
 
-//Function
-#include"Matrix3x3.h"
 //class
 #include "BaseObj.h"
 
 
 BaseObj::BaseObj() {
-	
-	worldPos_ = {};
 
-	//Parameter
-	 velocity_ = {};
-	 acceleration_ = {};
-	 scale_ = {};
-	 size_ = {};
-	 theta_=0;
-
-	//頂点とマトリックス
-	 vertexPos_ = {};
-	 screenVertex_ = {};
-	 localVertex_ = {};
-	 matrix_ = {};
-	 wvpVpMatrix_ = {};
+	Init();
+	camela_ = new Camela;
 };
 
-void BaseObj::RenderingPipeline(Camela& camela) {
+void BaseObj::Init() {
+	
+	//頂点とマトリックス
 
-	camela.MakeCamelaMatrix();
+	screenVertex_ = {};
+	matrix_ = {};
+	wvpVpMatrix_ = {};
+	acceleration_ = {};
+	theta_ = 0;
+
+}
+
+void BaseObj::RenderingPipeline() {
+
+	camela_->MakeCamelaMatrix();
 	matrix_ = MakeAffineMatrix(scale_, theta_, worldPos_);
-	wvpVpMatrix_=wvpVpMatrix(matrix_, camela.GetViewMatrix(), camela.GetOrthoMatrix(), camela.GetViewportMatrix());
+	wvpVpMatrix_ = wvpVpMatrix(matrix_, camela_->GetViewMatrix(), camela_->GetOrthoMatrix(), camela_->GetViewportMatrix());
 	screenVertex_ = Transform(localVertex_, wvpVpMatrix_);
 }
 

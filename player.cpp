@@ -1,33 +1,151 @@
-#include "player.h"
-
+Ôªø#include "player.h"
 
 Player::Player() {
 
 	Init();
-
+	texture_.Handle = Novice::LoadTexture("white1x1.png");
 }
 
 void Player::Init() {
 	
-	velocity_ = {};
-	acceleration_ = {};
+	BaseObj::Init();
+
 	scale_ = {1,1};
-	size_ = {};
-	theta_ = 0;
+	size_ = {32,32};
+	velocity_={ 4,4 };
 
-	//í∏ì_Ç∆É}ÉgÉäÉbÉNÉX
-	vertexPos_ = {};
-	screenVertex_ = {};
-	localVertex_ = {};
-	matrix_ = {};
-	wvpVpMatrix_ = {};
+	localVertex_ = MakeLoalVertex(size_);
 }
 
-void Player::Update(Camela& camela) {
+void Player::Update(char* keys, char* preKeys) {
 
-	BaseObj::RenderingPipeline(camela);
+	if (preKeys[DIK_F]) {
+
+	}
+	//ÁßªÂãï„Å®„Ç´„É°„É©Â§âÊèõ
+	NoGravityMove(worldPos_, velocity_, keys);
+	RenderingPipeline();
 }
-
 void Player::Draw() {
-
+	
+	newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
 }
+
+void Player::RenderingPipeline() {
+	BaseObj::RenderingPipeline();
+}
+
+
+void Player::NoGravityMove(Vector2& pos, Vector2& speed, char* keys) {
+
+	Vector2 normalizeVelocity;
+	Vector2 velocity = {};
+	//Â∑¶ÁßªÂãï
+	if (keys[DIK_A]) {
+		//Â∑¶‰∏ä
+		if (keys[DIK_W]) {
+
+			velocity.x = -0.7f;
+
+			velocity.y = -0.7f;
+
+		}
+		//Â∑¶‰∏ã
+		else if (keys[DIK_S]) {
+
+			velocity.x = -0.7f;
+
+			velocity.y = 0.7f;
+
+		}
+		else {
+			velocity.x = -1;
+			velocity.y = 0;
+		}
+	}
+	else if (keys[DIK_D]) {
+
+		if (keys[DIK_W]) {
+
+			velocity.x = 0.7f;
+
+			velocity.y = -0.7f;
+
+		}
+		else if (keys[DIK_S]) {
+
+			velocity.x = 0.7f;
+
+			velocity.y = 0.7f;
+
+		}
+		else {
+			velocity.x = 1;
+			velocity.y = 0;
+		}
+	}
+	else if (keys[DIK_W]) {
+
+		if (keys[DIK_A]) {
+
+			velocity.x = -0.7f;
+
+			velocity.y = -0.7f;
+
+		}
+		else if (keys[DIK_D]) {
+
+			velocity.x = 0.7f;
+
+			velocity.y = -0.7f;
+
+		}
+		else {
+
+			velocity.y = -1;
+			velocity.x = 0;
+
+		}
+	}
+
+	else if (keys[DIK_S]) {
+
+		if (keys[DIK_A]) {
+
+			velocity.x = -0.7f;
+
+			velocity.y = 0.7f;
+
+		}
+		else if (keys[DIK_D]) {
+
+			velocity.x = 0.7f;
+
+			velocity.y = 0.7f;
+
+		}
+		else {
+
+			velocity.y = 1;
+			velocity.x = 0;
+
+		}
+	}
+	else {
+
+		velocity.x = 0;
+		velocity.y = 0;
+	}
+
+	if (velocity.x != 0 || velocity.y != 0) {
+		normalizeVelocity = normalize(velocity);
+	}
+	else {
+		normalizeVelocity.x = 0;
+		normalizeVelocity.y = 0;
+	}
+
+	pos.x += normalizeVelocity.x * speed.x;
+	pos.y += normalizeVelocity.y * speed.y;
+}
+

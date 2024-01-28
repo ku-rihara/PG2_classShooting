@@ -56,6 +56,12 @@
     <ClCompile Include="Camela.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="bullet.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -139,5 +145,7 @@
       <Filter>Function</Filter>
     </ClInclude>
     <ClInclude Include="Camela.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="bullet.h" />
   </ItemGroup>
 </Project>
