@@ -63,7 +63,8 @@ void Player::Update(char* keys, char* preKeys) {
 	if (shotCurrentCollTime_ > 0.0f) {
 		shotCurrentCollTime_--;
 	}
-	//レンダリングパイプラインーーーーーーーーーーーーーーーーーーーーー
+
+	//レンダリングパイプライン
 	RenderingPipeline();
 
 	for (int i = 0; i < bulletMax; i++) {

@@ -9,13 +9,20 @@ private:
 
 public:
 
-	Enemy();
+	Enemy(float posX,float posY);
 	~Enemy();
 
-	void Init()override;
+	void Init(float posX, float posY);
 	void Update();
-	void RenderingPipeline()override;
 	void Draw();
+	void RenderingPipeline()override;
+
+	//setter
+	void SetIsDeath(bool is) { this->isDeath_=is; }
+
+
+	//getter
+	bool GetIsDeath()const { return isDeath_; }
 
 };
 
