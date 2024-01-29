@@ -1,5 +1,4 @@
-﻿#include<Novice.h>
-
+﻿
 //class
 #include "BaseObj.h"
 
@@ -10,18 +9,20 @@ BaseObj::BaseObj() {
 	camela_ = new Camela;
 };
 
-void BaseObj::Init() {
-	
-	//頂点とマトリックス
+BaseObj::~BaseObj() {
 
+}
+
+void BaseObj::Init() {
+	//頂点とマトリックス
 	screenVertex_ = {};
 	matrix_ = {};
 	wvpVpMatrix_ = {};
 	acceleration_ = {};
 	theta_ = 0;
-
 }
 
+//レンダリングパイプライン
 void BaseObj::RenderingPipeline() {
 
 	camela_->MakeCamelaMatrix();

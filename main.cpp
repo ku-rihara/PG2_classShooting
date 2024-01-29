@@ -4,11 +4,13 @@
 
 //class
 #include"Scene.h"
+#include"bullet.h"
 
 
 const char kWindowTitle[] = "LC1A_12_クリハラ_ケイタ_タイトル";
 
 int Scene::SceneNo_;
+
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -47,7 +49,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		scene->Draw();
 
 		/*Novice::ScreenPrintf(0, 0, "%d", scene->SceneNo_);
-		Novice::ScreenPrintf(0, 20, "%f", scene->player_->GetWorldPos().x);*/
+		Novice::ScreenPrintf(0, 20, "%f", scene->player_);*/
 		///
 		/// ↑描画処理ここまで
 		///

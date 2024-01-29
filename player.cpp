@@ -2,33 +2,84 @@
 
 Player::Player() {
 
+	for (int i = 0; i < bulletMax; i++) {
+		bullet_[i] = new Bullet();
+	}
+
 	Init();
 	texture_.Handle = Novice::LoadTexture("white1x1.png");
 }
 
 void Player::Init() {
-	
+
 	BaseObj::Init();
 
-	scale_ = {1,1};
-	size_ = {32,32};
-	velocity_={ 4,4 };
+	scale_ = { 1,1 };
+	size_ = { 32,32 };
+	radius_ = { size_.x / 2,size_.y / 2 };
+	velocity_ = { 4,4 };
+	isDeath_ = false;
 
 	localVertex_ = MakeLoalVertex(size_);
 }
 
 void Player::Update(char* keys, char* preKeys) {
 
-	if (preKeys[DIK_F]) {
+	if (preKeys) {
 
 	}
-	//移動とカメラ変換
+
+	//プレイヤーの移動
 	NoGravityMove(worldPos_, velocity_, keys);
+
+	//プレイヤーの弾発射
+	if (keys[DIK_SPACE]) {
+		for (int i = 0; i < bulletMax; i++) {
+
+			//撃ってない状態だったら
+			if (bullet_[i]->GetIsShot() == false&&shotCurrentCollTime_<=0) {
+
+				bullet_[i]->SetIsShot(true);//フラグ立てる
+				bullet_[i]->SetWorldPosX(worldPos_.x);
+				bullet_[i]->SetWorldPosY(worldPos_.y);
+				shotCurrentCollTime_=bullet_[i]->GetCollTime();
+				break;
+			}
+		}
+	}
+	//弾の移動処理
+	for (int i = 0; i < bulletMax; i++) {
+
+		if (bullet_[i]->GetIsShot() == true) {
+			bullet_[i]->Update();
+		}
+
+		if (bullet_[i]->GetWorldPos().y <= -bullet_[i]->GetRadius().y) {
+			bullet_[i]->SetIsShot(false);
+		}
+	}
+
+	//クールタイムをデクリメントしていく
+	if (shotCurrentCollTime_ > 0.0f) {
+		shotCurrentCollTime_--;
+	}
+	//レンダリングパイプラインーーーーーーーーーーーーーーーーーーーーー
 	RenderingPipeline();
+
+	for (int i = 0; i < bulletMax; i++) {
+		bullet_[i]->RenderingPipeline();
+	}
+
 }
 void Player::Draw() {
+
+	for (int i = 0; i < bulletMax; i++) {
+		bullet_[i]->Draw();
 	
+	}
 	newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
+
+
 }
 
 void Player::RenderingPipeline() {

@@ -11,6 +11,10 @@ Camela::Camela() {
 	Init();
 }
 
+ Camela::~Camela() {
+
+}
+
 void Camela::Init() {
 	pos_ = {};
 	zoomLevel_ = { 1,1 };
@@ -18,10 +22,8 @@ void Camela::Init() {
 	viewMatrix_ = {};
 	orthoMatrix_ = {};
 	viewportMatrix_ = {};
-
 	zoomOut_ = {};
 	zoomIn_ = {};
-
 }
 
 void Camela::MakeCamelaMatrix() {

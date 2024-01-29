@@ -15,7 +15,6 @@ protected:
 
 	//包含
 	Camela* camela_;
-
 	//座標
 	Vector2 worldPos_;
 
@@ -24,6 +23,7 @@ protected:
 	Vector2 acceleration_;
 	Vector2 scale_;
 	Vector2 size_;
+	Vector2 radius_;
 	float theta_;
 
 	//頂点とマトリックス
@@ -31,10 +31,11 @@ protected:
 	Vertex localVertex_;
 	Matrix3x3 matrix_;
 	Matrix3x3 wvpVpMatrix_;
+
 public:
 
-	//コンストラクタ
-	BaseObj();
+	BaseObj();//コンストラクタ
+	~BaseObj();//デストラクタ
 
 	virtual void Init();
 	virtual void RenderingPipeline();

@@ -21,6 +21,7 @@ public:
 public:
 
 	Camela();
+	~Camela();
 	void Init();
 	void MakeCamelaMatrix();
 	/*void ZoomOut();
@@ -44,9 +45,8 @@ public:
 	void SetZoomLevelX(float Zoom) { this->zoomLevel_.x = Zoom; }
 	void SetZoomLevelY(float Zoom) { this->zoomLevel_.y = Zoom; }
 	void SetIsZoomOut(bool isZoom) { this->zoomOut_.isEasing = isZoom; }
-	void SetZoomOutPuls(float zoomPuls) { this->zoomOut_.easingPlus = zoomPuls; }
+	void SetZoomOutPuls(float zoomPuls) { this->zoomOut_.easingPlus = zoomPuls;}
 	void SetIsZoomIn(bool isZoom) { this->zoomIn_.isEasing = isZoom; }
 	void SetZoomInPuls(float zoomPuls) { this->zoomIn_.easingPlus = zoomPuls; }
-
 };
 
