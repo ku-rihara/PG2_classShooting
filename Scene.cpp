@@ -5,23 +5,29 @@ Scene::Scene() {
 	player_ = new Player;
 
 	Init();
+	backGround.Handle = Novice::LoadTexture("white1x1.png");
 }
 
 void Scene::Init() {
-	SceneNo_ = 0;
+	sceneNo_ = TITLE;
+	isChange_ = false;
 	player_->Init();
 }
 
 void Scene::Update(char*keys,char*preKeys) {
 
-	if (keys[DIK_E] && preKeys[DIK_E] == 0) {
-		SceneNo_++;
-	}
-
-	switch (SceneNo_) {
+	switch (sceneNo_) {
 
 		//タイトルの処理
 	case TITLE:
+		//スペースキーでシーンチェンジ
+		if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0&&isChange_==false) {
+			isChange_ = true;
+		}
+
+		if (isChange_ == true) {
+
+		}
 
 		break;
 
@@ -42,13 +48,16 @@ void Scene::Update(char*keys,char*preKeys) {
 void Scene::Draw() {
 
 
-	switch (SceneNo_) {
+	switch (sceneNo_) {
 
 	case TITLE:
+		Novice::DrawBox(0, 0, 1280, 720, 0, BLACK, kFillModeSolid);
 
 		break;
 
 	case PLAY:
+
+		Novice::DrawBox(0, 0, 1280, 720, 0, BLACK, kFillModeSolid);
 
 		player_->Draw();
 

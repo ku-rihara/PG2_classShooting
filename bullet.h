@@ -5,14 +5,12 @@
 //class
 #include"BaseObj.h"
 
-const int bulletMax = 20;
+const int bulletMax = 30;
 
 class Bullet:public BaseObj {
 private:
 
-	//座標、クールタイム、撃ったかのフラグ
-	
-
+	//クールタイム、撃ったかのフラグ
 	const int collTime_=5;
 	bool isShot_;
 	

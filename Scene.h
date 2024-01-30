@@ -4,7 +4,7 @@
 
 //class
 #include"player.h"
-
+#include"Enemy.h"
 
 
 class Scene{
@@ -12,6 +12,7 @@ public:
 
 	//包含
 	Player* player_;
+	Enemy* enemy_;
 
 	enum  {
 		TITLE,
@@ -19,7 +20,10 @@ public:
 		CLEAR,
 	};
 
-	static int SceneNo_;
+	static int sceneNo_;
+	bool isChange_;
+
+	GH backGround;
 
 public:
 

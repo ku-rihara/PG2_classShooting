@@ -4,19 +4,20 @@
 
 //class
 #include"Scene.h"
-#include"bullet.h"
+
 
 
 const char kWindowTitle[] = "LC1A_12_クリハラ_ケイタ_タイトル";
 
-int Scene::SceneNo_;
-
+int Scene::sceneNo_;
+ const int kWindowSizeX = 1280;
+ const int kWindowSizeY = 720;
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// ライブラリの初期化
-	Novice::Initialize(kWindowTitle, 1280, 720);
+	Novice::Initialize(kWindowTitle, kWindowSizeX, kWindowSizeY);
 
 	//インスタンスを生成
 	Scene *scene = new Scene;

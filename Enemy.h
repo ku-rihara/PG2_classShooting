@@ -1,10 +1,20 @@
 #pragma once
+
+
 #include "BaseObj.h"
 
 class Enemy : public BaseObj{
 private:
 
+	enum MoveMode {
+		SPONE,
+		ATTACK,
+	};
+
 	bool isDeath_;
+	MoveMode moveMode_;
+	Easing spone_;
+	const float sponeMaxFrame_=30.0f;
 
 
 public:
@@ -19,7 +29,6 @@ public:
 
 	//setter
 	void SetIsDeath(bool is) { this->isDeath_=is; }
-
 
 	//getter
 	bool GetIsDeath()const { return isDeath_; }

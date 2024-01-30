@@ -1,10 +1,13 @@
 ﻿#pragma once
 #include<Novice.h>
+#include"math.h"
+#define _USE_MATH_DEFINES
 
 #include"struct.h"
 
 //Function
 #include"Matrix3x3.h"
+#include"Easing.h"
 #include"Function.h"
 
 //class

@@ -1,5 +1,5 @@
 #pragma once
-#pragma once
+
 
 struct Vector2 {
 	float x;
@@ -27,12 +27,6 @@ struct Matrix3x3 {
 struct Easing {
 	bool isEasing;
 	float easingTime;
-	float easingCoolTime;
-	float easingPlus;
-	bool isEasingEnd;
-	bool easingRock;
-	bool isBack;
-	int easingCount;
 };
 
 
