@@ -5,8 +5,11 @@ class RenditionBox : public BaseObj{
 private:
 
 	bool isStart_;
-	float easingTime_;
-	const float flameMax_=60;
+	bool isEnd_;
+	Easing scaling_;
+	const float flameMax_=40;
+
+	GH texture_;
 
 public:
 
@@ -18,7 +21,8 @@ public:
 	void RenderingPipeline()override;
 	void Draw();
 
-	GH texture_;
-
+	//getter
+	bool GetIsReturn()const { return scaling_.isReturn; }
+	
 };
 

@@ -11,13 +11,24 @@ private:
 		ATTACK,
 	};
 
-	bool isDeath_;
-	MoveMode moveMode_;
-	Easing spone_;
-	const float sponeMaxFrame_=30.0f;
+	enum AttackLevel {
+		LEVEL1,
+		LEVEL2,
+		LEVEL3,
+	};
 
+	MoveMode moveMode_;
+	AttackLevel attacklevel_;
+	Easing spone_;
+	const float sponeMaxFrame_ = 30.0f;
+
+	bool isDeath_;
+	int Hp_;
+	
+	GH texture_;
 
 public:
+	bool isDamage_;
 
 	Enemy(float posX,float posY);
 	~Enemy();

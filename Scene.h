@@ -5,6 +5,7 @@
 //class
 #include"player.h"
 #include"Enemy.h"
+#include"RenditionBox.h"
 
 
 class Scene{
@@ -13,6 +14,7 @@ public:
 	//包含
 	Player* player_;
 	Enemy* enemy_;
+	RenditionBox *renditionBox_;
 
 	enum  {
 		TITLE,

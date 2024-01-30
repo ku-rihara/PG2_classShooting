@@ -10,6 +10,10 @@ Player::Player() {
 	texture_.Handle = Novice::LoadTexture("white1x1.png");
 }
 
+Player::~Player() {
+
+}
+
 void Player::Init() {
 
 	BaseObj::Init();

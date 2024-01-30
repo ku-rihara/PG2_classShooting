@@ -68,11 +68,11 @@
     <ClCompile Include="Colligion.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
-    <ClCompile Include="Easing.cpp">
-      <Filter>KamataEngine</Filter>
-    </ClCompile>
     <ClCompile Include="RenditionBox.cpp">
       <Filter>KamataEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Easing.cpp">
+      <Filter>Function</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,7 +161,9 @@
     <ClInclude Include="bullet.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Colligion.h" />
-    <ClInclude Include="Easing.h" />
     <ClInclude Include="RenditionBox.h" />
+    <ClInclude Include="Easing.h">
+      <Filter>Function</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

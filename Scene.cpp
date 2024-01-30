@@ -2,7 +2,9 @@
 
 Scene::Scene() {
 
-	player_ = new Player;
+	player_ = new Player();
+	enemy_ = new Enemy(500,100);
+	renditionBox_ = new RenditionBox();
 
 	Init();
 	backGround.Handle = Novice::LoadTexture("white1x1.png");
@@ -12,6 +14,7 @@ void Scene::Init() {
 	sceneNo_ = TITLE;
 	isChange_ = false;
 	player_->Init();
+	enemy_->Init(500,100);
 }
 
 void Scene::Update(char*keys,char*preKeys) {
@@ -26,14 +29,19 @@ void Scene::Update(char*keys,char*preKeys) {
 		}
 
 		if (isChange_ == true) {
-
+			renditionBox_->ScalingUpdate();
+			if (renditionBox_->GetIsReturn() == true) {
+				sceneNo_ = PLAY;
+			}
 		}
 
 		break;
 
 		//ゲームプレイ中の処理
 	case PLAY:
+		renditionBox_->ScalingUpdate();
 		player_->Update(keys,preKeys);
+		enemy_->Update();
 
 		break;
 
@@ -52,7 +60,7 @@ void Scene::Draw() {
 
 	case TITLE:
 		Novice::DrawBox(0, 0, 1280, 720, 0, BLACK, kFillModeSolid);
-
+		renditionBox_->Draw();
 		break;
 
 	case PLAY:
@@ -60,7 +68,7 @@ void Scene::Draw() {
 		Novice::DrawBox(0, 0, 1280, 720, 0, BLACK, kFillModeSolid);
 
 		player_->Draw();
-
+		renditionBox_->Draw();
 		break;
 
 	case CLEAR:

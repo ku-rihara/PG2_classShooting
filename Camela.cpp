@@ -15,17 +15,15 @@ Camela::Camela() {
 
 }
 
-void Camela::Init() {
-	pos_ = {};
-	zoomLevel_ = { 1,1 };
-	worldMatrix_ = {};
-	viewMatrix_ = {};
-	orthoMatrix_ = {};
-	viewportMatrix_ = {};
-	zoomOut_ = {};
-	zoomIn_ = {};
-}
+ void Camela::Init() {
+	 pos_ = {};
+	 zoomLevel_ = { 1,1 };
+	 worldMatrix_ = {};
+	 viewMatrix_ = {};
+	 orthoMatrix_ = {};
+	 viewportMatrix_ = {};
 
+ }
 void Camela::MakeCamelaMatrix() {
 
 	worldMatrix_ = MakeAffineMatrix(zoomLevel_, 0, pos_);

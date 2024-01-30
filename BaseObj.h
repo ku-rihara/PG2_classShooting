@@ -1,7 +1,8 @@
 ﻿#pragma once
 #include<Novice.h>
-#include"math.h"
 #define _USE_MATH_DEFINES
+#include"math.h"
+
 
 #include"struct.h"
 
@@ -44,7 +45,7 @@ public:
 	virtual void RenderingPipeline();
 	
 	Vector2 GetWorldPos()const { return worldPos_; }
-
+	Vector2 GetRadius()const { return radius_; }
 
 };
 

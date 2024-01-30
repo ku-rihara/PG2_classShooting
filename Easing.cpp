@@ -58,6 +58,7 @@ float easeOutCirc(float EasingTime, float start, float end) {
 
 float easeInQuart(float EasingTime, float start, float end) {
 	float result;
+	
 
 	result = EasingTime * EasingTime * EasingTime * EasingTime;
 
