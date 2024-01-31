@@ -1,10 +1,10 @@
-﻿#include "bullet.h"
+#include "EnemyBullet.h"
 
 
-Bullet::Bullet() {
+EnemyBullet::EnemyBullet() {
 
 	Init();
-	size_ = { 10,10 };
+	size_ = { 32,32 };
 	scale_ = { 1,1 };
 	radius_ = { size_.x / 2,size_.y / 2 };
 	localVertex_ = MakeLoalVertex(size_);
@@ -13,28 +13,27 @@ Bullet::Bullet() {
 	texture_.Handle = Novice::LoadTexture("white1x1.png");
 }
 
-Bullet::~Bullet() {
+EnemyBullet::~EnemyBullet() {
 
 }
 
-void Bullet::Init() {
+void EnemyBullet::Init() {
 
 	BaseObj::Init();
-
 	isShot_ = false;
 }
 
-void Bullet::Update() {
+void EnemyBullet::Update(float posX,float posY) {
 
 	worldPos_.y -= velocity_.y;
 }
 
-void Bullet::RenderingPipeline() {
+void EnemyBullet::RenderingPipeline() {
 
 	BaseObj::RenderingPipeline();
 }
 
-void Bullet::Draw() {
+void EnemyBullet::Draw() {
 
 	newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
 

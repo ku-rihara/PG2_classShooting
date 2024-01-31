@@ -3,6 +3,10 @@
 Enemy::Enemy(float posX, float posY) {
 	Init(posX, posY);
 
+	for (int i = 0; i < EnemyBulletMax; i++) {
+		enemyBullet_[i] = new EnemyBullet;
+	}
+
 	texture_.Handle = Novice::LoadTexture("white1x1.png");
 }
 
@@ -44,6 +48,9 @@ void Enemy::Update() {
 	//アタックモード
 	if (moveMode_ == ATTACK) {
 		
+		if()
+
+
 	}
 
 	//レンダリングパイプライン
@@ -52,7 +59,12 @@ void Enemy::Update() {
 }
 
 void Enemy::Draw() {
-	newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
+	if (isDamage_ == false) {
+		newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
+	}
+	else if (isDamage_ == false) {
+		newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, RED);
+	}
 }
 
 //レンダリングパイプライン

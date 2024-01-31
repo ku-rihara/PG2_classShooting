@@ -7,7 +7,7 @@
 
 const int bulletMax = 30;
 
-class Bullet:public BaseObj {
+class PlayerBullet:public BaseObj {
 private:
 
 	//クールタイム、撃ったかのフラグ
@@ -20,8 +20,8 @@ private:
 public:
 
 	//コンストラクタ、デストラクタ
-	Bullet();
-	~Bullet();
+	PlayerBullet();
+	~PlayerBullet();
 
 	//Function
 	void Init()override;

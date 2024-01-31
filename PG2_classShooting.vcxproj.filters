@@ -59,7 +59,7 @@
     <ClCompile Include="Scene.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
-    <ClCompile Include="bullet.cpp">
+    <ClCompile Include="PlayerBullet.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
@@ -73,6 +73,9 @@
     </ClCompile>
     <ClCompile Include="Easing.cpp">
       <Filter>Function</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBullet.cpp">
+      <Filter>KamataEngine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,12 +161,13 @@
     </ClInclude>
     <ClInclude Include="Camela.h" />
     <ClInclude Include="Scene.h" />
-    <ClInclude Include="bullet.h" />
+    <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Colligion.h" />
     <ClInclude Include="RenditionBox.h" />
     <ClInclude Include="Easing.h">
       <Filter>Function</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyBullet.h" />
   </ItemGroup>
 </Project>

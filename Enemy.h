@@ -2,24 +2,29 @@
 
 
 #include "BaseObj.h"
+#include"EnemyBullet.h"
+
+const int EnemyBulletMax = 10;
 
 class Enemy : public BaseObj{
 private:
+
+	EnemyBullet* enemyBullet_[EnemyBulletMax];
 
 	enum MoveMode {
 		SPONE,
 		ATTACK,
 	};
 
-	enum AttackLevel {
-		LEVEL1,
-		LEVEL2,
-		LEVEL3,
+	enum AttackMode {
+		SHOT,
+		ASSAULT,
 	};
 
 	MoveMode moveMode_;
-	AttackLevel attacklevel_;
+	AttackMode attackMode_;
 	Easing spone_;
+	Easing Move_;
 	const float sponeMaxFrame_ = 30.0f;
 
 	bool isDeath_;

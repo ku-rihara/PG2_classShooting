@@ -3,7 +3,7 @@
 Player::Player() {
 
 	for (int i = 0; i < bulletMax; i++) {
-		bullet_[i] = new Bullet();
+		bullet_[i] = new PlayerBullet();
 	}
 
 	Init();
@@ -184,7 +184,6 @@ void Player::NoGravityMove(Vector2& pos, Vector2& speed, char* keys) {
 
 			velocity.y = 1;
 			velocity.x = 0;
-
 		}
 	}
 	else {
@@ -203,5 +202,19 @@ void Player::NoGravityMove(Vector2& pos, Vector2& speed, char* keys) {
 
 	pos.x += normalizeVelocity.x * speed.x;
 	pos.y += normalizeVelocity.y * speed.y;
+
+	if (pos.x >= 1280-radius_.x) {
+		pos.x = 1280 - radius_.x;
+	}
+	if (pos.x <=   radius_.x) {
+		pos.x = radius_.x;
+	}
+
+	if (pos.y >= 720 - radius_.y) {
+		pos.y = 720 - radius_.y;
+	}
+	if (pos.y <= -radius_.y) {
+		pos.y = radius_.y;
+	}
 }
 

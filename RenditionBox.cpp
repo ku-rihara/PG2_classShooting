@@ -9,6 +9,10 @@ RenditionBox::RenditionBox() {
 	texture_.Handle = Novice::LoadTexture("white1x1.png");
 }
 
+RenditionBox::~RenditionBox() {
+
+}
+
 
 void RenditionBox::ScalingInit() {
 	BaseObj::Init();

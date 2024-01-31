@@ -4,17 +4,20 @@
 
 //class
 #include"BaseObj.h"
-#include"bullet.h"
+#include"PlayerBullet.h"
 
 
 class Player:public BaseObj{
 
 private:
 	//包含
-	Bullet* bullet_[bulletMax];
+	PlayerBullet* bullet_[bulletMax];
 
 	int shotCurrentCollTime_;
+	int damageCurrentCollTime_;
+	const int damageCollTime_=20;
 	int life_;
+
 	bool isDeath_;
 
 	//画像
