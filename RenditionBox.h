@@ -23,6 +23,7 @@ public:
 
 	//getter
 	bool GetIsReturn()const { return scaling_.isReturn; }
+	bool GetIsEnd()const { return isEnd_; }
 	
 };
 

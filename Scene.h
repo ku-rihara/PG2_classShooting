@@ -25,6 +25,11 @@ public:
 	static int sceneNo_;
 	bool isChange_;
 
+	int background1_;
+	int background2_;
+	
+
+	//画像
 	GH backGround;
 
 public:

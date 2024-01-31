@@ -7,7 +7,7 @@ Scene::Scene() {
 	renditionBox_ = new RenditionBox();
 
 	Init();
-	backGround.Handle = Novice::LoadTexture("white1x1.png");
+	backGround.Handle = Novice::LoadTexture("./Resources/backGround.png");
 }
 
 void Scene::Init() {
@@ -15,14 +15,24 @@ void Scene::Init() {
 	isChange_ = false;
 	player_->Init();
 	enemy_->Init(500,100);
+	background1_=0;
+	background2_=-720;
 }
 
 void Scene::Update(char*keys,char*preKeys) {
 
 	switch (sceneNo_) {
 
-		//タイトルの処理
-	case TITLE:
+	case TITLE://タイトルの処理-----------------------------------------------------------------
+
+		//背景動かす
+		background1_ += 1;
+		background2_ += 1;
+		if (background1_ == 720) {
+			background1_ = 0;
+			background2_ = -720;
+		}
+
 		//スペースキーでシーンチェンジ
 		if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0&&isChange_==false) {
 			isChange_ = true;
@@ -34,14 +44,31 @@ void Scene::Update(char*keys,char*preKeys) {
 				sceneNo_ = PLAY;
 			}
 		}
-
 		break;
+		
+	case PLAY://ゲームプレイ中の処理-------------------------------------------------------------
+		//背景動かす
+		background1_ += 1;
+		background2_ += 1;
+		if (background1_ == 720) {
+			background1_ = 0;
+			background2_ = -720;
+		}
 
-		//ゲームプレイ中の処理
-	case PLAY:
-		renditionBox_->ScalingUpdate();
-		player_->Update(keys,preKeys);
-		enemy_->Update();
+		renditionBox_->ScalingUpdate();//演出ブロックの更新
+
+		//画面遷移終わったら敵をスポーンさせる
+		if (renditionBox_->GetIsEnd() == true) {
+			enemy_->Spone();
+		}
+
+		if (enemy_->GetIsSponeEnd() == true) {
+
+		}
+
+		player_->Update(keys,preKeys);//プレイヤ―の更新
+		enemy_->Update(player_->GetWorldPos());//敵の更新
+		
 
 		break;
 
@@ -59,15 +86,18 @@ void Scene::Draw() {
 	switch (sceneNo_) {
 
 	case TITLE:
-		Novice::DrawBox(0, 0, 1280, 720, 0, BLACK, kFillModeSolid);
+		Novice::DrawSprite(0, background1_, backGround.Handle, 1, 1, 0, WHITE);
+		Novice::DrawSprite(0, background2_, backGround.Handle, 1, 1, 0, WHITE);
 		renditionBox_->Draw();
 		break;
 
 	case PLAY:
 
-		Novice::DrawBox(0, 0, 1280, 720, 0, BLACK, kFillModeSolid);
+		Novice::DrawSprite(0, background1_, backGround.Handle, 1, 1, 0, WHITE);
+		Novice::DrawSprite(0, background2_, backGround.Handle, 1, 1, 0, WHITE);
 
 		player_->Draw();
+		enemy_->Draw();
 		renditionBox_->Draw();
 		break;
 

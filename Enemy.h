@@ -11,21 +11,18 @@ private:
 
 	EnemyBullet* enemyBullet_[EnemyBulletMax];
 
-	enum MoveMode {
-		SPONE,
-		ATTACK,
-	};
-
 	enum AttackMode {
 		SHOT,
 		ASSAULT,
 	};
 
-	MoveMode moveMode_;
-	AttackMode attackMode_;
+	bool isSponeEnd_;
 	Easing spone_;
-	Easing Move_;
 	const float sponeMaxFrame_ = 30.0f;
+
+	AttackMode attackMode_;
+	Easing Move_;
+	int shotCurrentCollTime_;
 
 	bool isDeath_;
 	int Hp_;
@@ -39,7 +36,8 @@ public:
 	~Enemy();
 
 	void Init(float posX, float posY);
-	void Update();
+	void Spone();
+	void Update(Vector2 pos);
 	void Draw();
 	void RenderingPipeline()override;
 
@@ -48,6 +46,7 @@ public:
 
 	//getter
 	bool GetIsDeath()const { return isDeath_; }
+	bool GetIsSponeEnd()const { return isSponeEnd_; }
 
 };
 

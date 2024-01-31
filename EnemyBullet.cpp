@@ -23,9 +23,10 @@ void EnemyBullet::Init() {
 	isShot_ = false;
 }
 
-void EnemyBullet::Update(float posX,float posY) {
+void EnemyBullet::Update() {
 
-	worldPos_.y -= velocity_.y;
+	worldPos_.x += direction_.x*velocity_.x;
+	worldPos_.y += direction_.y*velocity_.y;
 }
 
 void EnemyBullet::RenderingPipeline() {
