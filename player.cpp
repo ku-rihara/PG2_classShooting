@@ -57,7 +57,7 @@ void Player::Update(char* keys, char* preKeys) {
 		if (bullet_[i]->GetIsShot() == true) {
 			bullet_[i]->Update();
 		}
-
+		//画面外に出たらフラグを降ろす
 		if (bullet_[i]->GetWorldPos().y <= -bullet_[i]->GetRadius().y) {
 			bullet_[i]->SetIsShot(false);
 		}
@@ -66,6 +66,22 @@ void Player::Update(char* keys, char* preKeys) {
 	//クールタイムをデクリメントしていく
 	if (shotCurrentCollTime_ > 0.0f) {
 		shotCurrentCollTime_--;
+	}
+
+	//ダメージを受けた時の処理
+	if (isDamage_ == true&&damageCurrentCollTime_<0) {
+		life_--;
+		damageCurrentCollTime_ = damageCollTime_;
+		isDamage_ = false;
+	}
+
+	//クールタイムをデクリメント
+	if (damageCurrentCollTime_ >= 0) {
+		damageCurrentCollTime_--;
+	}
+
+	if (damageCurrentCollTime_ <= 0) {
+		damageCurrentCollTime_=0;
 	}
 
 	//レンダリングパイプライン
@@ -82,7 +98,10 @@ void Player::Draw() {
 		bullet_[i]->Draw();
 	
 	}
-	newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
+	//プレイヤーの描画
+	if (damageCurrentCollTime_ % 10 == 0) {
+		newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
+	}
 
 
 }
