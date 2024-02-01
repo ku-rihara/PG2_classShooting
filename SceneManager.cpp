@@ -3,19 +3,22 @@
 BaseScene* SceneManager::currentScene_ = NULL;
 
 SceneManager::SceneManager() {
-
-
-
+	scene_=TITLE;
 }
 
 void SceneManager::Init() {
 
 }
 
-void SceneManager::CangeScene(SCENE scene) {
+void SceneManager::CangeScene(int &scene) {
 
-	if (currentScene_ != NULL) {
+	/*if (currentScene_ != NULL) {
 		delete currentScene_;
+	}*/
+
+	if (BaseScene::GetIsChange() == true) {
+		scene++;
+		BaseScene::SetIsChange(false);
 	}
 
 	switch (scene) {

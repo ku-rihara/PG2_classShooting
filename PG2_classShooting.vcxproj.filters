@@ -17,6 +17,12 @@
     <Filter Include="Function">
       <UniqueIdentifier>{3fc227c9-2fb3-42e0-80d9-8be486945ee7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{e83ff9d7-a3cf-456f-9965-6f0328aedda6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{e2e1b5f2-69d7-4aa3-91b8-4e2157e57eb6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp">
@@ -41,12 +47,6 @@
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\StringUtility.cpp">
       <Filter>KamataEngine\Source</Filter>
     </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>KamataEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseObj.cpp">
-      <Filter>KamataEngine</Filter>
-    </ClCompile>
     <ClCompile Include="Function.cpp">
       <Filter>Function</Filter>
     </ClCompile>
@@ -56,37 +56,43 @@
     <ClCompile Include="Camela.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>KamataEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerBullet.cpp">
-      <Filter>KamataEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>KamataEngine</Filter>
-    </ClCompile>
     <ClCompile Include="Colligion.cpp">
-      <Filter>KamataEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="RenditionBox.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
     <ClCompile Include="Easing.cpp">
       <Filter>Function</Filter>
     </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseObj.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
     <ClCompile Include="EnemyBullet.cpp">
-      <Filter>KamataEngine</Filter>
+      <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="SceneTitle.cpp">
-      <Filter>KamataEngine</Filter>
+    <ClCompile Include="PlayerBullet.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="ScenePlay.cpp">
-      <Filter>KamataEngine</Filter>
+    <ClCompile Include="RenditionBox.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="SceneClear.cpp">
-      <Filter>KamataEngine</Filter>
+      <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="BaseScene.cpp">
+    <ClCompile Include="ScenePlay.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneTitle.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
   </ItemGroup>
@@ -163,8 +169,6 @@
       <Filter>KamataEngine\Include</Filter>
     </ClInclude>
     <ClInclude Include="struct.h" />
-    <ClInclude Include="player.h" />
-    <ClInclude Include="BaseObj.h" />
     <ClInclude Include="Function.h">
       <Filter>Function</Filter>
     </ClInclude>
@@ -172,18 +176,43 @@
       <Filter>Function</Filter>
     </ClInclude>
     <ClInclude Include="Camela.h" />
-    <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="PlayerBullet.h" />
-    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Colligion.h" />
-    <ClInclude Include="RenditionBox.h" />
     <ClInclude Include="Easing.h">
       <Filter>Function</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyBullet.h" />
-    <ClInclude Include="SceneTitle.h" />
-    <ClInclude Include="ScenePlay.h" />
-    <ClInclude Include="SceneClear.h" />
-    <ClInclude Include="BaseScene.h" />
+    <ClInclude Include="BaseObj.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBullet.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBullet.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="RenditionBox.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneClear.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTitle.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ScenePlay.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h" />
   </ItemGroup>
 </Project>

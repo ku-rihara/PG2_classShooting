@@ -4,7 +4,7 @@
 
 //class
 #include"SceneManager.h"
-
+#include"BaseScene.h"
 
 
 const char kWindowTitle[] = "LC1A_12_クリハラ_ケイタ_タイトル";
@@ -14,6 +14,7 @@ const char kWindowTitle[] = "LC1A_12_クリハラ_ケイタ_タイトル";
  const int kWindowSizeY = 720;
  bool BaseScene::isChange_;
 
+
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
@@ -22,6 +23,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	//インスタンスを生成
 	SceneManager *sceneManager = new SceneManager;
+	
 
 	// キー入力結果を受け取る箱
 	char keys[256] = {0};
@@ -39,7 +41,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓更新処理ここから
 		///
-		
+		sceneManager->CangeScene(sceneManager->scene_);
 		sceneManager->Update(keys,preKeys);
 		///
 		/// ↑更新処理ここまで
@@ -50,8 +52,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		sceneManager->Draw();
 
-		/*Novice::ScreenPrintf(0, 0, "%d", scene->SceneNo_);
-		Novice::ScreenPrintf(0, 20, "%f", scene->player_);*/
+		Novice::ScreenPrintf(0, 0, "%d", sceneManager->scene_);
+		
 		///
 		/// ↑描画処理ここまで
 		///

@@ -47,5 +47,7 @@ public:
 	Vector2 GetWorldPos()const { return worldPos_; }
 	Vector2 GetRadius()const { return radius_; }
 
+	void SetWorldPosX(float pos) { this->worldPos_.x = pos; }
+	void SetWorldPosY(float pos) { this->worldPos_.y = pos; }
 };
 

@@ -5,7 +5,7 @@ SceneTitle::SceneTitle() {
 	Init();
 
 	renditionBox_ = new RenditionBox();
-
+	backGround_ = new BackGround();
 }
 
 void SceneTitle::Init() {
@@ -13,13 +13,9 @@ void SceneTitle::Init() {
 }
 
 void SceneTitle::Update(char* keys, char* preKeys) {
-	////背景動かす
-	//background1_ += 1;
-	//background2_ += 1;
-	//if (background1_ == 720) {
-	//	background1_ = 0;
-	//	background2_ = -720;
-	//}
+
+	//背景動かす
+	backGround_->Update();
 
 	//スペースキーでシーンチェンジ
 	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0 && isScreenTransitions_ == false) {
@@ -35,7 +31,7 @@ void SceneTitle::Update(char* keys, char* preKeys) {
 }
 
 void SceneTitle::Draw() {
-
+	backGround_->Draw();
 	renditionBox_->Draw();
 }
 

@@ -12,6 +12,7 @@ public:
 	virtual void  Update(char* keys, char* preKeys) = 0;
 	virtual void  Draw() = 0;
 
-	bool GetIsChange()const { return isChange_; }
+	static  bool GetIsChange() { return isChange_; }
+	static 	void SetIsChange( bool is) { isChange_ = is; }
 };
 

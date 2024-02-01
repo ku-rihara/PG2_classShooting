@@ -23,9 +23,11 @@ public:
 		CLEAR,
 	};
 
+	int scene_;
+
 	SceneManager();
 
-	static void CangeScene(SCENE scene);
+	static void CangeScene(int& scene);
 	static void Init();
 	static void Update(char*keys,char*prekeys);
 	static void Draw();
