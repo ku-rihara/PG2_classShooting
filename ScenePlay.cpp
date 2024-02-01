@@ -1,4 +1,4 @@
-#include "ScenePlay.h"
+ï»¿#include "ScenePlay.h"
 
 ScenePlay::ScenePlay() {
 
@@ -20,9 +20,9 @@ void ScenePlay::Update(char *keys,char*preKeys) {
 		background2_ = -720;
 	}*/
 
-	renditionBox_->ScalingUpdate();//‰‰oƒuƒƒbƒN‚ÌXV
+	renditionBox_->ScalingUpdate();//æ¼”å‡ºãƒ–ãƒ­ãƒƒã‚¯ã®æ›´æ–°
 
-	//‰æ–Ê‘JˆÚI‚í‚Á‚½‚ç“G‚ğƒXƒ|[ƒ“‚³‚¹‚é
+	//ç”»é¢é·ç§»çµ‚ã‚ã£ãŸã‚‰æ•µã‚’ã‚¹ãƒãƒ¼ãƒ³ã•ã›ã‚‹
 	if (renditionBox_->GetIsEnd() == true) {
 		enemy_->Spone();
 	}
@@ -31,8 +31,8 @@ void ScenePlay::Update(char *keys,char*preKeys) {
 
 	}
 
-	player_->Update(keys, preKeys);//ƒvƒŒƒCƒ„\‚ÌXV
-	enemy_->Update(player_->GetWorldPos());//“G‚ÌXV
+	player_->Update(keys, preKeys);//ãƒ—ãƒ¬ã‚¤ãƒ¤â€•ã®æ›´æ–°
+	enemy_->Update(player_->GetWorldPos());//æ•µã®æ›´æ–°
 }
 
 void ScenePlay::Draw() {

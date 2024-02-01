@@ -4,6 +4,9 @@
 
 //class
 #include"BaseScene.h"
+#include"SceneTitle.h"
+#include"ScenePlay.h"
+#include"SceneClear.h"
 
 
 class SceneManager{

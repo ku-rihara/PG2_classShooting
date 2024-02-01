@@ -12,6 +12,7 @@ const char kWindowTitle[] = "LC1A_12_クリハラ_ケイタ_タイトル";
 
  const int kWindowSizeX = 1280;
  const int kWindowSizeY = 720;
+ bool BaseScene::isChange_;
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
