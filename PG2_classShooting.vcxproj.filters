@@ -56,7 +56,7 @@
     <ClCompile Include="Camela.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp">
+    <ClCompile Include="SceneManager.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
     <ClCompile Include="PlayerBullet.cpp">
@@ -75,6 +75,18 @@
       <Filter>Function</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBullet.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneTitle.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="ScenePlay.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneClear.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseScene.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
   </ItemGroup>
@@ -160,7 +172,7 @@
       <Filter>Function</Filter>
     </ClInclude>
     <ClInclude Include="Camela.h" />
-    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Colligion.h" />
@@ -169,5 +181,9 @@
       <Filter>Function</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBullet.h" />
+    <ClInclude Include="SceneTitle.h" />
+    <ClInclude Include="ScenePlay.h" />
+    <ClInclude Include="SceneClear.h" />
+    <ClInclude Include="BaseScene.h" />
   </ItemGroup>
 </Project>

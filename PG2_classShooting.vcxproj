@@ -109,6 +109,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseObj.cpp" />
+    <ClCompile Include="BaseScene.cpp" />
     <ClCompile Include="PlayerBullet.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\StringUtility.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp" />
@@ -127,10 +128,14 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="Matrix3x3.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="RenditionBox.cpp" />
-    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SceneClear.cpp" />
+    <ClCompile Include="ScenePlay.cpp" />
+    <ClCompile Include="SceneTitle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseObj.h" />
+    <ClInclude Include="BaseScene.h" />
     <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\base\StringUtility.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\math\Matrix4x4.h" />
@@ -168,7 +173,10 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="Matrix3x3.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="RenditionBox.h" />
-    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SceneClear.h" />
+    <ClInclude Include="ScenePlay.h" />
+    <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="struct.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

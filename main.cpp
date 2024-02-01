@@ -3,13 +3,13 @@
 #include"struct.h"
 
 //class
-#include"Scene.h"
+#include"SceneManager.h"
 
 
 
 const char kWindowTitle[] = "LC1A_12_クリハラ_ケイタ_タイトル";
 
-int Scene::sceneNo_;
+
  const int kWindowSizeX = 1280;
  const int kWindowSizeY = 720;
 
@@ -20,7 +20,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Novice::Initialize(kWindowTitle, kWindowSizeX, kWindowSizeY);
 
 	//インスタンスを生成
-	Scene *scene = new Scene;
+	SceneManager *sceneManager = new SceneManager;
 
 	// キー入力結果を受け取る箱
 	char keys[256] = {0};
@@ -39,7 +39,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓更新処理ここから
 		///
 		
-		scene->Update(keys,preKeys);
+		sceneManager->Update(keys,preKeys);
 		///
 		/// ↑更新処理ここまで
 		///
@@ -47,7 +47,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓描画処理ここから
 		///
-		scene->Draw();
+		sceneManager->Draw();
 
 		/*Novice::ScreenPrintf(0, 0, "%d", scene->SceneNo_);
 		Novice::ScreenPrintf(0, 20, "%f", scene->player_);*/

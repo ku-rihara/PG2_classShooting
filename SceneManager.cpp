@@ -1,27 +1,45 @@
-﻿#include "Scene.h"
+﻿#include "SceneManager.h"
 
-Scene::Scene() {
+BaseScene* SceneManager::currentScene_ = NULL;
 
-	player_ = new Player();
-	enemy_ = new Enemy(500,100);
-	renditionBox_ = new RenditionBox();
+SceneManager::SceneManager() {
 
-	Init();
-	backGround.Handle = Novice::LoadTexture("./Resources/backGround.png");
+
+
 }
 
-void Scene::Init() {
-	sceneNo_ = TITLE;
-	isChange_ = false;
-	player_->Init();
-	enemy_->Init(500,100);
-	background1_=0;
-	background2_=-720;
+void SceneManager::Init() {
+
 }
 
-void Scene::Update(char*keys,char*preKeys) {
+void SceneManager::CangeScene(SCENE scene) {
 
-	switch (sceneNo_) {
+	if (currentScene_ != NULL) {
+		delete currentScene_;
+	}
+
+	switch (scene) {
+
+	case SCENE::TITLE:
+		currentScene_ = new SceneTitle();
+		break;
+
+	case SCENE::PLAY:
+		currentScene_ = new ScenePlay();
+		break;
+
+	case SCENE::CLEAR:
+		currentScene_ = new SceneClear();
+		break;
+
+	default:
+		break;
+	}
+}
+
+void SceneManager::Update(char*keys,char*preKeys) {
+
+	switch (scene) {
 
 	case TITLE://タイトルの処理-----------------------------------------------------------------
 
@@ -48,28 +66,7 @@ void Scene::Update(char*keys,char*preKeys) {
 		
 	case PLAY://ゲームプレイ中の処理-------------------------------------------------------------
 		//背景動かす
-		background1_ += 1;
-		background2_ += 1;
-		if (background1_ == 720) {
-			background1_ = 0;
-			background2_ = -720;
-		}
-
-		renditionBox_->ScalingUpdate();//演出ブロックの更新
-
-		//画面遷移終わったら敵をスポーンさせる
-		if (renditionBox_->GetIsEnd() == true) {
-			enemy_->Spone();
-		}
-
-		if (enemy_->GetIsSponeEnd() == true) {
-
-		}
-
-		player_->Update(keys,preKeys);//プレイヤ―の更新
-		enemy_->Update(player_->GetWorldPos());//敵の更新
 		
-
 		break;
 
 		//クリア画面の処理
@@ -80,7 +77,7 @@ void Scene::Update(char*keys,char*preKeys) {
 	}
 }
 
-void Scene::Draw() {
+void SceneManager::Draw() {
 
 
 	switch (sceneNo_) {
@@ -106,4 +103,16 @@ void Scene::Draw() {
 		break;
 
 	}
+
+	
+}
+
+void SceneManager::Update(char*keys,char*preKyes) {
+	currentScene_->Update(keys,preKyes);
+
+}
+
+void SceneManager::Draw() {
+	currentScene_->Draw();
+
 }
