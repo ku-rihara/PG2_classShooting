@@ -25,16 +25,14 @@ void SceneManager::CangeScene(int &scene) {
 		switch (scene) {
 
 		case TITLE:
-			if (currentScene_ == NULL) {
+		
 				currentScene_ = new SceneTitle();
-			}
-			
-			break;
+		
+				break;
 
 		case PLAY:
-			if (currentScene_ == NULL) {
+	
 				currentScene_ = new ScenePlay();
-			}
 		
 			break;
 

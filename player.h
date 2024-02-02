@@ -32,6 +32,7 @@ public:
 
 	void Init()override;
 	void Update(char *keys,char *preKeys);
+	void Shot(char* keys);
 	void Draw();
 
 	void NoGravityMove(Vector2& pos, Vector2& speed,char* keys);

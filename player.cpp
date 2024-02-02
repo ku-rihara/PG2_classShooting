@@ -26,7 +26,7 @@ void Player::Init() {
 
 	localVertex_ = MakeLoalVertex(size_);
 }
-
+//更新
 void Player::Update(char* keys, char* preKeys) {
 
 	if (preKeys) {
@@ -36,17 +36,47 @@ void Player::Update(char* keys, char* preKeys) {
 	//プレイヤーの移動
 	NoGravityMove(worldPos_, velocity_, keys);
 
+	//弾を撃つ処理
+	Shot(keys);
+	
+	//レンダリングパイプライン
+	RenderingPipeline();
+
+	for (int i = 0; i < bulletMax; i++) {
+		bullet_[i]->RenderingPipeline();
+	}
+
+}
+//描画
+void Player::Draw() {
+
+	for (int i = 0; i < bulletMax; i++) {
+		bullet_[i]->Draw();
+	
+	}
+	//プレイヤーの描画
+	if (damageCurrentCollTime_ % 10 == 0) {
+		newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
+	}
+}
+
+void Player::RenderingPipeline() {
+	BaseObj::RenderingPipeline();
+}
+
+//弾を撃つ関数
+void Player::Shot(char*keys) {
 	//プレイヤーの弾発射
 	if (keys[DIK_SPACE]) {
 		for (int i = 0; i < bulletMax; i++) {
 
 			//撃ってない状態だったら
-			if (bullet_[i]->GetIsShot() == false&&shotCurrentCollTime_<=0) {
+			if (bullet_[i]->GetIsShot() == false && shotCurrentCollTime_ <= 0) {
 
 				bullet_[i]->SetIsShot(true);//フラグ立てる
 				bullet_[i]->SetWorldPosX(worldPos_.x);
 				bullet_[i]->SetWorldPosY(worldPos_.y);
-				shotCurrentCollTime_=bullet_[i]->GetCollTime();
+				shotCurrentCollTime_ = bullet_[i]->GetCollTime();
 				break;
 			}
 		}
@@ -69,7 +99,7 @@ void Player::Update(char* keys, char* preKeys) {
 	}
 
 	//ダメージを受けた時の処理
-	if (isDamage_ == true&&damageCurrentCollTime_<0) {
+	if (isDamage_ == true && damageCurrentCollTime_ < 0) {
 		life_--;
 		damageCurrentCollTime_ = damageCollTime_;
 		isDamage_ = false;
@@ -81,35 +111,10 @@ void Player::Update(char* keys, char* preKeys) {
 	}
 
 	if (damageCurrentCollTime_ <= 0) {
-		damageCurrentCollTime_=0;
-	}
-
-	//レンダリングパイプライン
-	RenderingPipeline();
-
-	for (int i = 0; i < bulletMax; i++) {
-		bullet_[i]->RenderingPipeline();
+		damageCurrentCollTime_ = 0;
 	}
 
 }
-void Player::Draw() {
-
-	for (int i = 0; i < bulletMax; i++) {
-		bullet_[i]->Draw();
-	
-	}
-	//プレイヤーの描画
-	if (damageCurrentCollTime_ % 10 == 0) {
-		newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
-	}
-
-
-}
-
-void Player::RenderingPipeline() {
-	BaseObj::RenderingPipeline();
-}
-
 
 void Player::NoGravityMove(Vector2& pos, Vector2& speed, char* keys) {
 
