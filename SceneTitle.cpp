@@ -3,9 +3,9 @@
 
 SceneTitle::SceneTitle() {
 
-		Init();
-		renditionBox_ = new RenditionBox();
-		backGround_ = new BackGround();
+	Init();
+	renditionBox_ = new RenditionBox();
+	backGround_ = new BackGround();
 }
 
 void SceneTitle::Init() {
@@ -23,7 +23,7 @@ void SceneTitle::Update(char* keys, char* preKeys) {
 	}
 
 	if (isScreenTransitions_ == true) {
-		renditionBox_->ScalingUpdate();
+		renditionBox_->ScaleUp();
 		if (renditionBox_->GetIsReturn() == true) {
 			BaseScene::isChange_ = true;
 		}

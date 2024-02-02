@@ -95,6 +95,9 @@
     <ClCompile Include="BackGround.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
+    <ClCompile Include="BaseScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">

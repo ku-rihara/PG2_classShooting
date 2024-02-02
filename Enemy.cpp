@@ -1,7 +1,7 @@
 ﻿#include "Enemy.h"
 
-Enemy::Enemy(float posX, float posY) {
-	Init(posX, posY);
+Enemy::Enemy() {
+	Init();
 
 	for (int i = 0; i < EnemyBulletMax; i++) {
 		bullet_[i] = new EnemyBullet;
@@ -15,20 +15,33 @@ Enemy::~Enemy() {
 
 }
 
-void Enemy::Init(float posX, float posY) {
+void Enemy::Init() {
 
-	startPos_.x = posX;
-	startPos_.y = posY;
+	//座標
+	startPos_.x = 500;
+	startPos_.y = 100;
 	worldPos_ = startPos_;
-	size_ = { 64,64 };
-	radius_ = { size_.x / 2,size_.y / 2 };
-	localVertex_ = MakeLoalVertex(size_);
+	
+	//スポーン
 	spone_.easingTime = 0;
-	isDeath_ = false;
 	spone_.isEasing = false;
 
-	BaseObj::Init();
+	//サイズ
+	size_ = { 64,64 };
+	scale_ = { 0,0 };
+	radius_ = { size_.x / 2,size_.y / 2 };
+	localVertex_ = MakeLoalVertex(size_);
 
+	//フラグ
+	isDeath_ = false;
+	isDamage_ = false;
+	isAttackModeChange_ = false;
+	
+	//ライフ
+	hp_ = hpMax_;
+	life_ = lifeMax_;
+
+	BaseObj::Init();
 }
 
 void Enemy::Spone() {
@@ -80,19 +93,42 @@ void Enemy::Update(Vector2 pos) {
 		Assault(pos);
 	}
 
-	//ダメージを受けたらの処理
+	//HPを減らす処理
+	if (isDamage_ == true) {
+		hp_--;
+		isDamage_ = false;
+	}
+	//HP0以下で死亡
+	if (hp_ <= 0&&isDeath_==false) {
+		isDeath_ = true;
+		life_--;
+		deathCollTime_ = deathCollTimeMax_;
+	}
 
+	//死亡時の処理
+	if (isDeath_ == true) {	
+		deathCollTime_--;
+
+		if (deathCollTime_ <= 0) {
+
+			if (life_ != 0) {
+				Init();
+			}
+		}
+	}
 
 	//レンダリングパイプライン
 	RenderingPipeline();
 }
 
 void Enemy::Draw() {
-	if (isDamage_ == false) {
-		newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
-	}
-	else if (isDamage_ == true) {
-		newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, RED);
+	if (isDeath_ == false) {
+		if (isDamage_ == false) {
+			newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
+		}
+		else if (isDamage_ == true) {
+			newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, RED);
+		}
 	}
 }
 

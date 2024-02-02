@@ -3,37 +3,38 @@
 BaseScene* SceneManager::currentScene_ = NULL;
 
 SceneManager::SceneManager() {
-	
-	scene_ = TITLE;
+	BaseScene::SetIsChange(true);
+	scene_ = -1;
 }
 
 void SceneManager::Init() {
 }
 
-void SceneManager::CangeScene(int &scene) {
+void SceneManager::CangeScene(int& scene) {
 
-	
-
-	if (BaseScene::GetIsChange() == true) {
+	//シーン切り替え処理
+	if (BaseScene::GetIsChange()) {
 		scene++;
+		if (scene > CLEAR) {
+			scene = TITLE;
+		}
 		if (currentScene_ != NULL) {
 			delete currentScene_;
 		}
-		BaseScene::SetIsChange(false);
-	}
-	
+
+
 		switch (scene) {
 
 		case TITLE:
-		
-				currentScene_ = new SceneTitle();
-		
-				break;
+
+			currentScene_ = new SceneTitle();
+
+			break;
 
 		case PLAY:
-	
-				currentScene_ = new ScenePlay();
-		
+
+			currentScene_ = new ScenePlay();
+
 			break;
 
 		case CLEAR:
@@ -41,18 +42,18 @@ void SceneManager::CangeScene(int &scene) {
 			break;
 
 		}
-	
+		BaseScene::SetIsChange(false);
+	}
 }
 
-void SceneManager::Update(char*keys,char*preKeys) {
-	
-		currentScene_->Update(keys, preKeys);
-	
+void SceneManager::Update(char* keys, char* preKeys) {
+
+	currentScene_->Update(keys, preKeys);
 
 }
 
 void SceneManager::Draw() {
-	
-		currentScene_->Draw();
+
+	currentScene_->Draw();
 
 }

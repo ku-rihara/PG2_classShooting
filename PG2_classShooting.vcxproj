@@ -110,6 +110,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
   <ItemGroup>
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="BaseObj.cpp" />
+    <ClCompile Include="BaseScene.cpp" />
     <ClCompile Include="PlayerBullet.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\StringUtility.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp" />

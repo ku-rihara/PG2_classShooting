@@ -18,6 +18,13 @@ private:
 		ASSAULT,
 	};
 
+	//定数
+	const float sponeMaxFrame_ = 30.0f;
+	const float assaultMaxFlame_ = 30.0f;
+	const int hpMax_ = 50;
+	const int lifeMax_ = 2;
+	const int deathCollTimeMax_ = 60;
+
 	//座標
 	Vector2 startPos_;
 	Vector2 savePos_;
@@ -26,13 +33,13 @@ private:
 	//スポーン
 	bool isSponeEnd_;
 	Easing spone_;
-	const float sponeMaxFrame_ = 30.0f;
+
 
 	//突進
 	AttackMode attackMode_;
 	Easing assault_;
 	bool isAttackModeChange_;
-	const float assaultMaxFlame_ = 30.0f;
+
 	int assaultCount_;
 
 	//弾
@@ -40,7 +47,8 @@ private:
 
 	//死亡フラグ、体力
 	bool isDeath_;
-	int Hp_;
+	int deathCollTime_;
+	int hp_;
 	int life_;
 	
 	//画像
@@ -49,10 +57,10 @@ private:
 public:
 	bool isDamage_;
 
-	Enemy(float posX,float posY);
+	Enemy();
 	~Enemy();
 
-	void Init(float posX, float posY);
+	void Init();
 	void Spone();
 	void Update(Vector2 pos);
 	void Shot(Vector2 pos);

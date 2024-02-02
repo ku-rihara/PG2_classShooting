@@ -7,7 +7,8 @@ protected:
 static bool isChange_;
 
 public:
-
+	BaseScene();
+	virtual ~BaseScene();
 
 	virtual void  Init() = 0;
 	virtual void  Update(char* keys, char* preKeys) = 0;

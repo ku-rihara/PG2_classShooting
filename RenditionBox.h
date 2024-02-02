@@ -17,13 +17,13 @@ public:
 	~RenditionBox();
 
 	void ScalingInit();
-	void ScalingUpdate();
+	void ScaleUp();
+	void ScaleDown();
 	void RenderingPipeline()override;
 	void Draw();
 
 	//getter
 	bool GetIsReturn()const { return scaling_.isReturn; }
 	bool GetIsEnd()const { return isEnd_; }
-	
 };
 

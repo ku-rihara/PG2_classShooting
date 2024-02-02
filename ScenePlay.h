@@ -27,6 +27,7 @@ private:
 	Colligion* colligion_;
 	BackGround* background_;
 
+
 public:
 
 	ScenePlay();

@@ -17,7 +17,7 @@ Player::~Player() {
 void Player::Init() {
 
 	BaseObj::Init();
-
+	worldPos_ = { 500,600 };
 	scale_ = { 1,1 };
 	size_ = { 32,32 };
 	radius_ = { size_.x / 2,size_.y / 2 };
@@ -237,7 +237,7 @@ void Player::NoGravityMove(Vector2& pos, Vector2& speed, char* keys) {
 	if (pos.y >= 720 - radius_.y) {
 		pos.y = 720 - radius_.y;
 	}
-	if (pos.y <= -radius_.y) {
+	if (pos.y <= radius_.y) {
 		pos.y = radius_.y;
 	}
 }

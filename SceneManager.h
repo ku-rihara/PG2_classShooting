@@ -8,7 +8,6 @@
 #include"ScenePlay.h"
 #include"SceneClear.h"
 
-
 class SceneManager{
 private:
 

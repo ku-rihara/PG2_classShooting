@@ -53,7 +53,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		sceneManager->Draw();
 
 		Novice::ScreenPrintf(0, 0, "%d", sceneManager->scene_);
-		
+	
 		///
 		/// ↑描画処理ここまで
 		///
