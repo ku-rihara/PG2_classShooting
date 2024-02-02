@@ -2,13 +2,15 @@
 
 ScenePlay::ScenePlay() {
 
-	player_ = new Player();
-	enemy_ = new Enemy(500,100);
-	playerBullet_ = new PlayerBullet();
-	enemyBullet_ = new EnemyBullet();
-	renditionBox_ = new RenditionBox();
-	background_ = new BackGround();
-	colligion_ = new Colligion();
+	
+		player_ = new Player();
+		enemy_ = new Enemy(500, 100);
+		playerBullet_ = new PlayerBullet();
+		enemyBullet_ = new EnemyBullet();
+		renditionBox_ = new RenditionBox();
+		background_ = new BackGround();
+		colligion_ = new Colligion();
+	
 }
 
 void ScenePlay::Init() {

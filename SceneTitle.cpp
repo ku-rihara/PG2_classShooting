@@ -2,10 +2,10 @@
 
 
 SceneTitle::SceneTitle() {
-	Init();
 
-	renditionBox_ = new RenditionBox();
-	backGround_ = new BackGround();
+		Init();
+		renditionBox_ = new RenditionBox();
+		backGround_ = new BackGround();
 }
 
 void SceneTitle::Init() {

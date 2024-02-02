@@ -23,7 +23,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	//インスタンスを生成
 	SceneManager *sceneManager = new SceneManager;
-	
+
 
 	// キー入力結果を受け取る箱
 	char keys[256] = {0};
