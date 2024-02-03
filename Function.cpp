@@ -89,17 +89,20 @@ void newDrawQuad(Vertex VerTex, float startx, float starty, float DrawWidth, flo
 }
 
 
-void  CircleColligion(Vector2 posA, Vector2 posB,float radA,float radB,bool&isColligion) {
-	
+bool  CircleColligion(Vector2 posA, Vector2 posB, float radA, float radB) {
+
 	float distance;
 
 	float x = posA.x - posB.x;
 	float y = posA.y - posB.y;
 
-	distance= sqrtf(x * x + y * y);
+	distance = sqrtf(x * x + y * y);
 
 	if (distance <= radA + radB) {
-		isColligion = true;
+		return true;
+	}
+	else {
+		return false;
 	}
 
 }

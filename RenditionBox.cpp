@@ -1,11 +1,12 @@
 ﻿#include "RenditionBox.h"
 
 RenditionBox::RenditionBox() {
-
+	
 	BaseObj::Init();
-	isStart_ = false;
-	isEnd_ = false;
+	ScalingInit();
 	scaling_ = {};
+	isScaleUpEnd_ = false;
+	isScaleDownEnd_ = false;
 	texture_.Handle = Novice::LoadTexture("white1x1.png");
 }
 
@@ -22,32 +23,45 @@ void RenditionBox::ScalingInit() {
 	localVertex_ = MakeLoalVertex(size_);
 	scaling_.easingTime = 0;
 	scaling_.easingCollTime = 0;
-	isStart_ = true;
-	scaling_.isReturn = false;
-	isEnd_ = false;
+	isScaleUpStart_ = false;
+	isScaleDownStart_ = false;
+	
+}
+
+void RenditionBox::ScaleUpInit() {
+	ScalingInit();
+	isScaleUpStart_ = true;
+	isScaleDownStart_ = false;
+}
+
+void RenditionBox::ScaleDownInit() {
+	ScalingInit();
+	isScaleUpStart_ = false;
+	isScaleDownStart_ = true;
 }
 
 void RenditionBox::ScaleUp() {
 
-	if (isStart_ == false) {
-		ScalingInit();
+	if (isScaleUpStart_ == false && isScaleUpEnd_ == false) {
+		ScaleUpInit();
+		isScaleDownStart_ = false;
+		isScaleUpStart_ = true;
 
 	}
 
-	if (isStart_ == true) {
+	if (isScaleUpStart_ == true) {
 		scaling_.easingTime ++;
-
 		scale_.x = easeInQuart(scaling_.easingTime/ flameMax_, 0, 20);
 		scale_.y = easeInQuart(scaling_.easingTime/ flameMax_,0, 20);
 		theta_ += (1.0f / 10.0f) *float(M_PI);
 
 		//折り返しフラグを立てる
-		if (scaling_.easingTime >= flameMax_&&scaling_.isReturn==false) {
+		if (scaling_.easingTime >= flameMax_) {
 			scaling_.easingCollTime++;
 			if (scaling_.easingCollTime >= 30) {
 				scaling_.easingCollTime = 0;
-				scaling_.isReturn = true;
-				isStart_ = false;
+				isScaleUpStart_ = false;
+				isScaleUpEnd_ = true;
 				
 			}
 		}
@@ -58,13 +72,13 @@ void RenditionBox::ScaleUp() {
 
 void RenditionBox::ScaleDown() {
 
-	if (isStart_ == false&& isEnd_ == false) {
-		ScalingInit();
+	if (isScaleDownStart_ == false&& isScaleDownEnd_ == false&& isScaleUpStart_ ==false ) {
+		ScaleDownInit();
 		scaling_.easingTime = flameMax_;
 	}
 
 	//始まった
-	if (isStart_ == true) {
+	if (isScaleDownStart_ == true) {
 		scaling_.easingTime--;
 
 		scale_.x = easeInQuart(scaling_.easingTime / flameMax_, 0, 20);
@@ -73,9 +87,9 @@ void RenditionBox::ScaleDown() {
 
 		//イージングを止める
 		if (scaling_.easingTime <= 0) {
-			isStart_ = false;
+			isScaleDownStart_ = false;
+			isScaleDownEnd_ = true;
 			scaling_.easingTime = 0;
-			isEnd_ = true;
 		}
 
 	}

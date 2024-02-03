@@ -46,7 +46,9 @@ private:
 	int shotCurrentCollTime_;
 
 	//死亡フラグ、体力
+	bool isDamage_;
 	bool isDeath_;
+	bool isResporn_;
 	int deathCollTime_;
 	int hp_;
 	int life_;
@@ -55,25 +57,32 @@ private:
 	GH texture_;
 
 public:
-	bool isDamage_;
+
 
 	Enemy();
 	~Enemy();
 
 	void Init();
+	void AttackInit();
 	void Spone();
+	void Respone();
 	void Update(Vector2 pos);
 	void Shot(Vector2 pos);
 	void Assault(Vector2 pos);
 	void Draw();
 	void RenderingPipeline()override;
 
-	//setter
-	void SetIsDeath(bool is) { this->isDeath_=is; }
 
 	//getter
 	bool GetIsDeath()const { return isDeath_; }
+	bool GetIsDamage()const { return isDamage_; }
+	bool GetIsResporn()const { return isResporn_; }
 	bool GetIsSponeEnd()const { return isSponeEnd_; }
+	EnemyBullet* GetEnemyBullet(int i)const { return bullet_[i];}
+
+	//setter
+	void SetIsDeath(bool is) { this->isDeath_=is; }
+	void SetIsDamage(bool is) { this->isDamage_ = is; }
 
 };
 

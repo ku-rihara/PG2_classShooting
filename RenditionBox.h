@@ -4,8 +4,10 @@ class RenditionBox : public BaseObj{
 
 private:
 
-	bool isStart_;
-	bool isEnd_;
+	bool isScaleUpStart_;
+	bool isScaleDownStart_;
+	bool isScaleUpEnd_;
+	bool isScaleDownEnd_;
 	Easing scaling_;
 	const float flameMax_=40;
 
@@ -17,13 +19,15 @@ public:
 	~RenditionBox();
 
 	void ScalingInit();
+	void ScaleUpInit();
+	void ScaleDownInit();
 	void ScaleUp();
 	void ScaleDown();
 	void RenderingPipeline()override;
 	void Draw();
 
 	//getter
-	bool GetIsReturn()const { return scaling_.isReturn; }
-	bool GetIsEnd()const { return isEnd_; }
+	bool GetIsScaleUpEnd()const { return isScaleUpEnd_; }
+	bool GetIsSaleDownEnd()const { return isScaleDownEnd_; }
 };
 

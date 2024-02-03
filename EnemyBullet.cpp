@@ -8,7 +8,7 @@ EnemyBullet::EnemyBullet() {
 	scale_ = { 1,1 };
 	radius_ = { size_.x / 2,size_.y / 2 };
 	localVertex_ = MakeLoalVertex(size_);
-	velocity_ = { 0,6 };
+	velocity_ = { 6,6 };
 
 	texture_.Handle = Novice::LoadTexture("white1x1.png");
 }

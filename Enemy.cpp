@@ -3,6 +3,8 @@
 Enemy::Enemy() {
 	Init();
 
+	isResporn_ = false;
+
 	for (int i = 0; i < EnemyBulletMax; i++) {
 		bullet_[i] = new EnemyBullet;
 	}
@@ -36,7 +38,7 @@ void Enemy::Init() {
 	isDeath_ = false;
 	isDamage_ = false;
 	isAttackModeChange_ = false;
-	
+
 	//ライフ
 	hp_ = hpMax_;
 	life_ = lifeMax_;
@@ -44,26 +46,6 @@ void Enemy::Init() {
 	BaseObj::Init();
 }
 
-void Enemy::Spone() {
-	//出現イージングフラグを立てる
-	if (isDeath_ == false && spone_.isEasing == false) {
-		spone_.isEasing = true;
-	}
-	//出現イージングフラグが立ったらスケールをイージング
-	if (spone_.isEasing == true) {
-		spone_.easingTime++;
-		scale_.x = easeOutBack(spone_.easingTime / sponeMaxFrame_, 0, 1);
-		scale_.y = easeOutBack(spone_.easingTime / sponeMaxFrame_, 0, 1);
-
-		//イージングが終わったらシューティングモードに切り替わる
-		if (spone_.easingTime >= sponeMaxFrame_) {
-			spone_.easingTime = sponeMaxFrame_;
-
-			attackMode_ = SHOT;
-			isSponeEnd_ = true;
-		}
-	}
-}
 
 void Enemy::Update(Vector2 pos) {
 
@@ -73,14 +55,13 @@ void Enemy::Update(Vector2 pos) {
 		//ショット➩突進
 		if (attackMode_ == SHOT) {
 			attackMode_ = ASSAULT;
-			assaultCount_ = 0;
-			assault_.easingTime = 0;
-			assault_.easingCollTime = 0;
+			AttackInit();
 			isAttackModeChange_ = false;
 		}
 		//突進➩ショット
 		else if (attackMode_ == ASSAULT) {
 			attackMode_ = SHOT;
+			AttackInit();
 			isAttackModeChange_ = false;
 		}
 	}
@@ -111,17 +92,28 @@ void Enemy::Update(Vector2 pos) {
 
 		if (deathCollTime_ <= 0) {
 
-			if (life_ != 0) {
+			if (life_ > 0) {
 				Init();
+				isResporn_ = true;
 			}
 		}
 	}
 
-	//レンダリングパイプライン
-	RenderingPipeline();
+	Respone();
+
+	for (int i = 0; i < EnemyBulletMax; i++) {
+		bullet_[i]->RenderingPipeline();
+	}
 }
 
 void Enemy::Draw() {
+
+	for (int i = 0; i < EnemyBulletMax; i++) {
+		if (bullet_[i]->GetIsShot() == true) {
+			bullet_[i]->Draw();
+		}
+	}
+
 	if (isDeath_ == false) {
 		if (isDamage_ == false) {
 			newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
@@ -130,8 +122,28 @@ void Enemy::Draw() {
 			newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, RED);
 		}
 	}
+
+	for (int i = 0; i < EnemyBulletMax; i++) {
+		Novice::ScreenPrintf(0, 100+i * 20, "%d", bullet_[i]->GetIsShotEnd()); 
+	}
+	Novice::ScreenPrintf(0, 600, "%d", isAttackModeChange_);
+	Novice::ScreenPrintf(0, 620, "%d", attackMode_);
 }
 
+
+void Enemy::AttackInit() {
+
+	for (int i = 0; i < EnemyBulletMax; i++) {
+		bullet_[i]->SetWorldPosX(worldPos_.x);
+		bullet_[i]->SetWorldPosY(worldPos_.y);
+		bullet_[i]->SetIsShot(false);
+		shotCurrentCollTime_ = 0;
+		bullet_[i]->SetIsShotEnd(false);
+	}
+	assaultCount_ = 0;
+	assault_.easingTime = 0;
+	assault_.easingCollTime = 0;
+}
 
 void Enemy::Shot(Vector2 pos) {
 
@@ -141,7 +153,8 @@ void Enemy::Shot(Vector2 pos) {
 			bullet_[i]->SetIsShot(true);
 			bullet_[i]->SetWorldPosX(worldPos_.x);
 			bullet_[i]->SetWorldPosY(worldPos_.y);
-			bullet_[i]->SetDirection(normalize(worldPos_, pos));
+			bullet_[i]->SetDirection(normalize(pos, worldPos_));
+			shotCurrentCollTime_ = bullet_[i]->GetCollTime();
 			break;
 		}
 	}
@@ -157,7 +170,11 @@ void Enemy::Shot(Vector2 pos) {
 		}
 	}
 
-	//全て弾が画面外に行ったら、合ったくもーどを切り替える
+	//全て弾が画面外に行ったら
+	/*if (bullet_[9]->GetIsShotEnd() == true) {
+			isAttackModeChange_ = true;
+
+		}*/
 	for (int i = 0; i < EnemyBulletMax; i++) {
 		if (bullet_[i]->GetIsShotEnd() == false) {
 			isAttackModeChange_ = false;
@@ -203,8 +220,8 @@ void Enemy::Assault(Vector2 pos) {
 		//突進イージング
 		if (assault_.isEasing == true && assault_.easingCollTime <= 0) {
 			assault_.easingTime++;
-			worldPos_.x = easeInQuart(assault_.easingTime / assaultMaxFlame_, savePos_.x, startPos_.x);
-			worldPos_.y = easeInQuart(assault_.easingTime / assaultMaxFlame_, savePos_.y, startPos_.y);
+			worldPos_.x = easeOutCirc(assault_.easingTime / assaultMaxFlame_, savePos_.x, startPos_.x);
+			worldPos_.y = easeOutCirc(assault_.easingTime / assaultMaxFlame_, savePos_.y, startPos_.y);
 
 			//MAXフレームに到達したらフラグを降ろす
 			if (assault_.easingTime >= assaultMaxFlame_) {
@@ -219,9 +236,52 @@ void Enemy::Assault(Vector2 pos) {
 	//イージングクールタイムを減らす
 	if (assault_.easingCollTime >= 0) {
 		assault_.easingCollTime--;
+		assault_.easingTime = 0;
 	}
 }
 
+void Enemy::Spone() {
+	//出現イージングフラグを立てる
+	if (isDeath_ == false && spone_.isEasing == false && isSponeEnd_ == false) {
+		spone_.isEasing = true;
+	}
+	//出現イージングフラグが立ったらスケールをイージング
+	if (spone_.isEasing == true) {
+		spone_.easingTime++;
+		scale_.x = easeOutBack(spone_.easingTime / sponeMaxFrame_, 0, 1);
+		scale_.y = easeOutBack(spone_.easingTime / sponeMaxFrame_, 0, 1);
+
+		//イージングが終わったらシューティングモードに切り替わる
+		if (spone_.easingTime >= sponeMaxFrame_) {
+			spone_.easingTime = sponeMaxFrame_;
+
+			/*attackMode_ = SHOT;*/
+			isSponeEnd_ = true;
+
+		}
+	}
+}
+
+void Enemy::Respone() {
+	//出現イージングフラグを立てる
+	if (isDeath_ == false && spone_.isEasing == false && isResporn_ == true) {
+		spone_.isEasing = true;
+	}
+	//出現イージングフラグが立ったらスケールをイージング
+	if (spone_.isEasing == true) {
+		spone_.easingTime++;
+		scale_.x = easeOutBack(spone_.easingTime / sponeMaxFrame_, 0, 1);
+		scale_.y = easeOutBack(spone_.easingTime / sponeMaxFrame_, 0, 1);
+
+		//イージングが終わったらシューティングモードに切り替わる
+		if (spone_.easingTime >= sponeMaxFrame_) {
+			spone_.easingTime = sponeMaxFrame_;
+
+			/*attackMode_ = SHOT;*/
+			isResporn_ = false;
+		}
+	}
+}
 
 //レンダリングパイプライン
 void Enemy::RenderingPipeline() {

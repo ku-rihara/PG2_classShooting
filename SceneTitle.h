@@ -14,8 +14,8 @@ private:
 
 	RenditionBox* renditionBox_;
 	BackGround* backGround_;
-
 	bool isScreenTransitions_;
+
 
 public:
 

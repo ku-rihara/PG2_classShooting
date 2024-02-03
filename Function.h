@@ -19,4 +19,4 @@ Vertex MakeLoalVertex(Vector2 size);
 
 void newDrawQuad(Vertex VerTex, float startx, float starty, float DrawWidth, float DrawHeigth, int Handle, int Color);
 
-void  CircleColligion(Vector2 posA, Vector2 posB, float radA, float radB, bool& isColligion);
+bool  CircleColligion(Vector2 posA, Vector2 posB, float radA, float radB);

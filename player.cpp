@@ -2,7 +2,7 @@
 
 Player::Player() {
 
-	for (int i = 0; i < bulletMax; i++) {
+	for (int i = 0; i < playerBulletMax; i++) {
 		bullet_[i] = new PlayerBullet();
 	}
 
@@ -17,14 +17,19 @@ Player::~Player() {
 void Player::Init() {
 
 	BaseObj::Init();
+	//座標、サイズ
 	worldPos_ = { 500,600 };
 	scale_ = { 1,1 };
 	size_ = { 32,32 };
 	radius_ = { size_.x / 2,size_.y / 2 };
-	velocity_ = { 4,4 };
-	isDeath_ = false;
-
 	localVertex_ = MakeLoalVertex(size_);
+	hp_ = hpMax;
+	//速度
+	velocity_ = { 4,4 };
+
+
+	isDeath_ = false;
+	damageCurrentCollTime_ = 0;
 }
 //更新
 void Player::Update(char* keys, char* preKeys) {
@@ -39,10 +44,28 @@ void Player::Update(char* keys, char* preKeys) {
 	//弾を撃つ処理
 	Shot(keys);
 	
-	//レンダリングパイプライン
-	RenderingPipeline();
+	//ダメージを受けた時の処理
+	if (isDamage_ == true && damageCurrentCollTime_ <= 0) {
+		hp_--;
+		damageCurrentCollTime_ = damageCollTime_;
+		isDamage_ = false;
+	}
 
-	for (int i = 0; i < bulletMax; i++) {
+	//クールタイムをデクリメント
+	if (damageCurrentCollTime_ >= 0) {
+		damageCurrentCollTime_--;
+	}
+
+	if (damageCurrentCollTime_ < 0) {
+		damageCurrentCollTime_ = 0;
+	}
+
+	//死亡処理
+	if (hp_ <= 0) {
+		isDeath_ = true;
+	}
+
+	for (int i = 0; i < playerBulletMax; i++) {
 		bullet_[i]->RenderingPipeline();
 	}
 
@@ -50,25 +73,23 @@ void Player::Update(char* keys, char* preKeys) {
 //描画
 void Player::Draw() {
 
-	for (int i = 0; i < bulletMax; i++) {
-		bullet_[i]->Draw();
-	
+	for (int i = 0; i < playerBulletMax; i++) {
+		if (bullet_[i]->GetIsShot() == true) {
+			bullet_[i]->Draw();
+		}
 	}
+
 	//プレイヤーの描画
-	if (damageCurrentCollTime_ % 10 == 0) {
+	if (damageCurrentCollTime_ % 5 == 0&&isDeath_==false) {
 		newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
 	}
-}
-
-void Player::RenderingPipeline() {
-	BaseObj::RenderingPipeline();
 }
 
 //弾を撃つ関数
 void Player::Shot(char*keys) {
 	//プレイヤーの弾発射
 	if (keys[DIK_SPACE]) {
-		for (int i = 0; i < bulletMax; i++) {
+		for (int i = 0; i < playerBulletMax; i++) {
 
 			//撃ってない状態だったら
 			if (bullet_[i]->GetIsShot() == false && shotCurrentCollTime_ <= 0) {
@@ -82,7 +103,7 @@ void Player::Shot(char*keys) {
 		}
 	}
 	//弾の移動処理
-	for (int i = 0; i < bulletMax; i++) {
+	for (int i = 0; i < playerBulletMax; i++) {
 
 		if (bullet_[i]->GetIsShot() == true) {
 			bullet_[i]->Update();
@@ -96,22 +117,6 @@ void Player::Shot(char*keys) {
 	//クールタイムをデクリメントしていく
 	if (shotCurrentCollTime_ > 0.0f) {
 		shotCurrentCollTime_--;
-	}
-
-	//ダメージを受けた時の処理
-	if (isDamage_ == true && damageCurrentCollTime_ < 0) {
-		life_--;
-		damageCurrentCollTime_ = damageCollTime_;
-		isDamage_ = false;
-	}
-
-	//クールタイムをデクリメント
-	if (damageCurrentCollTime_ >= 0) {
-		damageCurrentCollTime_--;
-	}
-
-	if (damageCurrentCollTime_ <= 0) {
-		damageCurrentCollTime_ = 0;
 	}
 
 }
@@ -227,8 +232,8 @@ void Player::NoGravityMove(Vector2& pos, Vector2& speed, char* keys) {
 	pos.x += normalizeVelocity.x * speed.x;
 	pos.y += normalizeVelocity.y * speed.y;
 
-	if (pos.x >= 1280-radius_.x) {
-		pos.x = 1280 - radius_.x;
+	if (pos.x >= 900-radius_.x) {
+		pos.x = 900 - radius_.x;
 	}
 	if (pos.x <=   radius_.x) {
 		pos.x = radius_.x;
@@ -242,3 +247,7 @@ void Player::NoGravityMove(Vector2& pos, Vector2& speed, char* keys) {
 	}
 }
 
+
+void Player::RenderingPipeline() {
+	BaseObj::RenderingPipeline();
+}

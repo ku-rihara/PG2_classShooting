@@ -98,6 +98,9 @@
     <ClCompile Include="BaseScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="OperateUI.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -217,5 +220,6 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="BackGround.h" />
+    <ClInclude Include="OperateUI.h" />
   </ItemGroup>
 </Project>

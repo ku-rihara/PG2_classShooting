@@ -11,10 +11,13 @@ public:
 
 	Colligion();
 
-	void PlayerEnemyColligion(Player& player, Enemy& enemy);
+	static void PlayerEnemyColligion(Player& player, Enemy& enemy);
 
-	void BulletColligion(PlayerBullet& playerBullet, Enemy& enemy);
+	static	void BulletColligion(PlayerBullet& playerBullet, Enemy& enemy);
 
-	void BulletColligion(EnemyBullet& enemyBullet, Player& player);
+	static	void BulletColligion(EnemyBullet& enemyBullet, Player& player);
+
+
+
 };
 

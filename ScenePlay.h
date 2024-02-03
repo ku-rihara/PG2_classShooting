@@ -6,9 +6,8 @@
 //obj
 #include"player.h"
 #include"Enemy.h"
-#include"PlayerBullet.h"
-#include"EnemyBullet.h"
 #include"RenditionBox.h"
+#include"OperateUI.h"
 
 //colligion
 #include"Colligion.h"
@@ -21,12 +20,10 @@ private:
 
 	Player* player_;
 	Enemy* enemy_;
-	PlayerBullet* playerBullet_;
-	EnemyBullet* enemyBullet_;
 	RenditionBox* renditionBox_;
 	Colligion* colligion_;
 	BackGround* background_;
-
+	OperateUI* operateUI_;
 
 public:
 

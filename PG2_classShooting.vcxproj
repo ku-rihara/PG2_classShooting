@@ -111,6 +111,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="BaseObj.cpp" />
     <ClCompile Include="BaseScene.cpp" />
+    <ClCompile Include="OperateUI.cpp" />
     <ClCompile Include="PlayerBullet.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\StringUtility.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp" />
@@ -138,6 +139,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="BaseObj.h" />
     <ClInclude Include="BaseScene.h" />
+    <ClInclude Include="OperateUI.h" />
     <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\base\StringUtility.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\math\Matrix4x4.h" />

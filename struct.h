@@ -26,7 +26,6 @@ struct Matrix3x3 {
 
 struct Easing {
 	bool isEasing;
-	bool isReturn;
 	float easingTime;
 	float easingIncrement;
 	int easingCollTime;

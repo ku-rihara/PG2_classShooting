@@ -17,6 +17,9 @@ void SceneTitle::Update(char* keys, char* preKeys) {
 	//背景動かす
 	backGround_->Update();
 
+		renditionBox_->ScaleDown();
+	
+
 	//スペースキーでシーンチェンジ
 	if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0 && isScreenTransitions_ == false) {
 		isScreenTransitions_ = true;
@@ -24,8 +27,10 @@ void SceneTitle::Update(char* keys, char* preKeys) {
 
 	if (isScreenTransitions_ == true) {
 		renditionBox_->ScaleUp();
-		if (renditionBox_->GetIsReturn() == true) {
+		if (renditionBox_->GetIsScaleUpEnd() == true) {
+		
 			BaseScene::isChange_ = true;
+			BaseScene::isIncrement_ = true;
 		}
 	}
 }

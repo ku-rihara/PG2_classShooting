@@ -22,4 +22,5 @@ void BackGround::Update() {
 void BackGround::Draw() {
 	Novice::DrawSprite(0, background1_, texture_.Handle, 1.43f, 1, 0, WHITE);
 	Novice::DrawSprite(0, background2_, texture_.Handle, 1.43f, 1, 0, WHITE);
+
 }
