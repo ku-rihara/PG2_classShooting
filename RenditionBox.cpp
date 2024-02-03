@@ -103,7 +103,5 @@ void RenditionBox::RenderingPipeline() {
 }
 
 void RenditionBox::Draw() {
-
 	newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
-	Novice::ScreenPrintf(0, 20, "%f", scale_.x);
 }

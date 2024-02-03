@@ -12,8 +12,7 @@ ScenePlay::ScenePlay() {
 }
 
 void ScenePlay::Init() {
-	player_->Init();
-	enemy_->Init();
+	
 }
 
 void ScenePlay::Update(char *keys,char*preKeys) {
@@ -28,12 +27,14 @@ void ScenePlay::Update(char *keys,char*preKeys) {
 		enemy_->Spone();
 	}
 
+	//敵がスポーンし終わったらゲーム開始
 	if (enemy_->GetIsSponeEnd() == true||enemy_->GetIsResporn()==true) {
 
 		player_->Update(keys, preKeys);//プレイヤ―の更新
 		enemy_->Update(player_->GetWorldPos());//敵の更新
 	}
 
+	//プレイヤーが死んだらタイトルに戻る
 	if (player_->GetIsDeath() == true) {
 		renditionBox_->ScaleUp();
 		if (renditionBox_->GetIsScaleUpEnd() == true) {
@@ -42,21 +43,30 @@ void ScenePlay::Update(char *keys,char*preKeys) {
 		}
 	}
 
-	if (enemy_->GetIsDeath() == false) {
-		//当たり判定
-		colligion_->PlayerEnemyColligion(*player_, *enemy_);
-		for (int i = 0; i < playerBulletMax; i++) {
-			colligion_->BulletColligion(*player_->GetBullet(i), *enemy_);
-		}
-		for (int i = 0; i < EnemyBulletMax; i++) {
-			colligion_->BulletColligion(*enemy_->GetEnemyBullet(i), *player_);
+	//敵が死んだらクリア画面に行く
+	if (enemy_->GetIsLose() == true) {
+		renditionBox_->ScaleUp();
+		if (renditionBox_->GetIsScaleUpEnd() == true) {
+			BaseScene::isChange_ = true;
+			BaseScene::isIncrement_ = true;
 		}
 	}
 
+	//当たり判定
+	if (enemy_->GetIsDeath() == false) {	
+		colligion_->PlayerEnemyColligion(*player_, *enemy_);//敵と自機
+
+		for (int i = 0; i < playerBulletMax; i++) {
+			colligion_->BulletColligion(*player_->GetBullet(i), *enemy_);//プレイヤーの弾と敵
+		}
+
+		for (int i = 0; i < EnemyBulletMax; i++) {
+			colligion_->BulletColligion(*enemy_->GetEnemyBullet(i), *player_);//敵の弾とプレイヤ―
+		}
+	}
 		//レンダリングパイプライン
 		player_->RenderingPipeline();
 		enemy_->RenderingPipeline();
-
 }
 
 void ScenePlay::Draw() {

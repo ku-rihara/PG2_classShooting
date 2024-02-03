@@ -43,9 +43,9 @@ void Player::Update(char* keys, char* preKeys) {
 
 	//弾を撃つ処理
 	Shot(keys);
-	
+
 	//ダメージを受けた時の処理
-	if (isDamage_ == true && damageCurrentCollTime_ <= 0) {
+	if (isDamage_ == true && damageCurrentCollTime_ == 0) {
 		hp_--;
 		damageCurrentCollTime_ = damageCollTime_;
 		isDamage_ = false;
@@ -80,13 +80,13 @@ void Player::Draw() {
 	}
 
 	//プレイヤーの描画
-	if (damageCurrentCollTime_ % 5 == 0&&isDeath_==false) {
+	if (damageCurrentCollTime_ % 5 == 0 && isDeath_ == false) {
 		newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
 	}
 }
 
 //弾を撃つ関数
-void Player::Shot(char*keys) {
+void Player::Shot(char* keys) {
 	//プレイヤーの弾発射
 	if (keys[DIK_SPACE]) {
 		for (int i = 0; i < playerBulletMax; i++) {
@@ -232,10 +232,10 @@ void Player::NoGravityMove(Vector2& pos, Vector2& speed, char* keys) {
 	pos.x += normalizeVelocity.x * speed.x;
 	pos.y += normalizeVelocity.y * speed.y;
 
-	if (pos.x >= 900-radius_.x) {
+	if (pos.x >= 900 - radius_.x) {
 		pos.x = 900 - radius_.x;
 	}
-	if (pos.x <=   radius_.x) {
+	if (pos.x <= radius_.x) {
 		pos.x = radius_.x;
 	}
 

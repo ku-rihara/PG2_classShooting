@@ -2,6 +2,7 @@
 
 #include"BaseObj.h"
 
+const int EnemyBulletMax = 10;
 
 class EnemyBullet:public BaseObj {
 private:

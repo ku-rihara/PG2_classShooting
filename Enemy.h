@@ -4,7 +4,6 @@
 #include "BaseObj.h"
 #include"EnemyBullet.h"
 
-const int EnemyBulletMax = 10;
 
 class Enemy : public BaseObj{
 private:
@@ -40,7 +39,6 @@ private:
 	AttackMode attackMode_;
 	Easing assault_;
 	bool isAttackModeChange_;
-
 	int assaultCount_;
 
 	//弾
@@ -48,9 +46,10 @@ private:
 
 	//死亡フラグ、体力
 	bool isDamage_;
-	int damageCurrentCollTime_;
+	bool isLose_;
 	bool isDeath_;
 	bool isResporn_;
+	int damageCurrentCollTime_;
 	int deathCollTime_;
 	int hp_;
 	int life_;
@@ -76,6 +75,7 @@ public:
 
 	//getter
 	bool GetIsDeath()const { return isDeath_; }
+	bool GetIsLose()const { return isLose_; }
 	bool GetIsDamage()const { return isDamage_; }
 	bool GetIsResporn()const { return isResporn_; }
 	bool GetIsSponeEnd()const { return isSponeEnd_; }

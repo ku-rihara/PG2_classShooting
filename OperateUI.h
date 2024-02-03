@@ -6,15 +6,12 @@ class OperateUI{
 
 private:
 
-
-	GH space_;
+	GH spaceSmall_;
 	GH wasd_;
 
 public:
+
 	OperateUI();
-
 	void Draw();
-
-
 };
 

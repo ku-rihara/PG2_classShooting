@@ -24,7 +24,7 @@ void EnemyBullet::Init() {
 }
 
 void EnemyBullet::Update() {
-
+	theta_ += 0.5f;
 	worldPos_.x += direction_.x*velocity_.x;
 	worldPos_.y += direction_.y*velocity_.y;
 }
@@ -36,6 +36,6 @@ void EnemyBullet::RenderingPipeline() {
 
 void EnemyBullet::Draw() {
 
-	newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
+	newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, RED);
 
 }

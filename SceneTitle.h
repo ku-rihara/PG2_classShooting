@@ -14,8 +14,10 @@ private:
 
 	RenditionBox* renditionBox_;
 	BackGround* backGround_;
-	bool isScreenTransitions_;
-
+	bool isGameStart_;
+	
+	GH title_;
+	GH space_;
 
 public:
 

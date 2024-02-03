@@ -7,7 +7,7 @@
 #include"BaseScene.h"
 
 
-const char kWindowTitle[] = "LC1A_12_クリハラ_ケイタ_タイトル";
+const char kWindowTitle[] = "LC1A_12_クリハラ_ケイタ_ボスハンター";
 
 
  const int kWindowSizeX = 1280;
@@ -54,8 +54,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓描画処理ここから
 		///
 		sceneManager->Draw();
-
-		Novice::ScreenPrintf(0, 0, "%d", sceneManager->scene_);
 	
 		///
 		/// ↑描画処理ここまで
