@@ -7,7 +7,7 @@ Player::Player() {
 	}
 
 	Init();
-	texture_.Handle = Novice::LoadTexture("white1x1.png");
+	texture_.Handle = Novice::LoadTexture("./Resources/player.png");
 }
 
 Player::~Player() {
@@ -20,7 +20,7 @@ void Player::Init() {
 	//座標、サイズ
 	worldPos_ = { 500,600 };
 	scale_ = { 1,1 };
-	size_ = { 32,32 };
+	size_ = { 48,48 };
 	radius_ = { size_.x / 2,size_.y / 2 };
 	localVertex_ = MakeLoalVertex(size_);
 	hp_ = hpMax;

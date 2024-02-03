@@ -42,6 +42,7 @@ void ScenePlay::Update(char *keys,char*preKeys) {
 		}
 	}
 
+	if (enemy_->GetIsDeath() == false) {
 		//当たり判定
 		colligion_->PlayerEnemyColligion(*player_, *enemy_);
 		for (int i = 0; i < playerBulletMax; i++) {
@@ -50,6 +51,8 @@ void ScenePlay::Update(char *keys,char*preKeys) {
 		for (int i = 0; i < EnemyBulletMax; i++) {
 			colligion_->BulletColligion(*enemy_->GetEnemyBullet(i), *player_);
 		}
+	}
+
 		//レンダリングパイプライン
 		player_->RenderingPipeline();
 		enemy_->RenderingPipeline();

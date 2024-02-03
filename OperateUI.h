@@ -7,6 +7,9 @@ class OperateUI{
 private:
 
 
+	GH space_;
+	GH wasd_;
+
 public:
 	OperateUI();
 

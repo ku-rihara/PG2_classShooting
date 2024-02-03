@@ -13,12 +13,14 @@ private:
 	//包含
 	PlayerBullet* bullet_[playerBulletMax];
 
+	//定数
+	const int damageCollTime_ = 20;
+	const int hpMax = 10;
+
 	bool isDamage_;
 
 	int shotCurrentCollTime_;
 	int damageCurrentCollTime_;
-	const int damageCollTime_=20;
-	const int hpMax = 10;
 	int hp_;
 
 	bool isDeath_;

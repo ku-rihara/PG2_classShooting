@@ -24,6 +24,7 @@ private:
 	const int hpMax_ = 50;
 	const int lifeMax_ = 2;
 	const int deathCollTimeMax_ = 60;
+	const int damageCollTime_ = 5;
 
 	//座標
 	Vector2 startPos_;
@@ -47,6 +48,7 @@ private:
 
 	//死亡フラグ、体力
 	bool isDamage_;
+	int damageCurrentCollTime_;
 	bool isDeath_;
 	bool isResporn_;
 	int deathCollTime_;
@@ -57,7 +59,6 @@ private:
 	GH texture_;
 
 public:
-
 
 	Enemy();
 	~Enemy();

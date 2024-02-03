@@ -4,12 +4,13 @@ Enemy::Enemy() {
 	Init();
 
 	isResporn_ = false;
+	life_ = lifeMax_;
 
 	for (int i = 0; i < EnemyBulletMax; i++) {
 		bullet_[i] = new EnemyBullet;
 	}
 
-	texture_.Handle = Novice::LoadTexture("white1x1.png");
+	texture_.Handle = Novice::LoadTexture("./Resources/enemy.png");
 }
 
 
@@ -41,64 +42,73 @@ void Enemy::Init() {
 
 	//ライフ
 	hp_ = hpMax_;
-	life_ = lifeMax_;
 
 	BaseObj::Init();
 }
 
 
 void Enemy::Update(Vector2 pos) {
+	if (isResporn_ == false&&life_>0) {
+		//アタックモードチェンジ
+		if (isAttackModeChange_ == true) {
 
-	//アタックモードチェンジ
-	if (isAttackModeChange_ == true) {
-
-		//ショット➩突進
+			//ショット➩突進
+			if (attackMode_ == SHOT) {
+				attackMode_ = ASSAULT;
+				AttackInit();
+				isAttackModeChange_ = false;
+			}
+			//突進➩ショット
+			else if (attackMode_ == ASSAULT) {
+				attackMode_ = SHOT;
+				AttackInit();
+				isAttackModeChange_ = false;
+			}
+		}
+		//弾を撃つ処理
 		if (attackMode_ == SHOT) {
-			attackMode_ = ASSAULT;
-			AttackInit();
-			isAttackModeChange_ = false;
+			Shot(pos);
 		}
-		//突進➩ショット
+		//突進する処理
 		else if (attackMode_ == ASSAULT) {
-			attackMode_ = SHOT;
-			AttackInit();
-			isAttackModeChange_ = false;
+			Assault(pos);
 		}
-	}
-	//弾を撃つ処理
-	if (attackMode_ == SHOT) {
-		Shot(pos);
-	}
-	//突進する処理
-	else if (attackMode_ == ASSAULT) {
-		Assault(pos);
-	}
 
-	//HPを減らす処理
-	if (isDamage_ == true) {
-		hp_--;
-		isDamage_ = false;
-	}
-	//HP0以下で死亡
-	if (hp_ <= 0&&isDeath_==false) {
-		isDeath_ = true;
-		life_--;
-		deathCollTime_ = deathCollTimeMax_;
-	}
+		//HPを減らす処理
+		if (isDamage_ == true && damageCurrentCollTime_ <= 0) {
+			hp_--;
+			damageCurrentCollTime_ = damageCollTime_;
+			isDamage_ = false;
+		}
+		//HP0以下で死亡
+		if (hp_ <= 0 && isDeath_ == false) {
+			isDeath_ = true;
+			life_--;
+			deathCollTime_ = deathCollTimeMax_;
+		}
 
-	//死亡時の処理
-	if (isDeath_ == true) {	
-		deathCollTime_--;
+		//クールタイムをデクリメント
+		if (damageCurrentCollTime_ >= 0) {
+			damageCurrentCollTime_--;
+		}
 
-		if (deathCollTime_ <= 0) {
+		if (damageCurrentCollTime_ < 0) {
+			damageCurrentCollTime_ = 0;
+		}
 
-			if (life_ > 0) {
-				Init();
-				isResporn_ = true;
+		//死亡時の処理
+		if (isDeath_ == true) {
+			deathCollTime_--;
+
+			if (deathCollTime_ <= 0) {
+
+				if (life_ > 0) {
+					Init();
+					isResporn_ = true;
+				}
 			}
 		}
 	}
-
 	Respone();
 
 	for (int i = 0; i < EnemyBulletMax; i++) {
@@ -107,27 +117,25 @@ void Enemy::Update(Vector2 pos) {
 }
 
 void Enemy::Draw() {
+	if (isDeath_==false) {
+		//弾の描画
+		for (int i = 0; i < EnemyBulletMax; i++) {
+			if (bullet_[i]->GetIsShot() == true) {
+				bullet_[i]->Draw();
+			}
+		}
+		//敵の描画
+		if (isDeath_ == false) {
 
-	for (int i = 0; i < EnemyBulletMax; i++) {
-		if (bullet_[i]->GetIsShot() == true) {
-			bullet_[i]->Draw();
+			if (isDamage_ == true && damageCurrentCollTime_ <= 0) {
+				newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, RED);
+			}
+			else {
+				newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
+			}
 		}
 	}
 
-	if (isDeath_ == false) {
-		if (isDamage_ == false) {
-			newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
-		}
-		else if (isDamage_ == true) {
-			newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, RED);
-		}
-	}
-
-	for (int i = 0; i < EnemyBulletMax; i++) {
-		Novice::ScreenPrintf(0, 100+i * 20, "%d", bullet_[i]->GetIsShotEnd()); 
-	}
-	Novice::ScreenPrintf(0, 600, "%d", isAttackModeChange_);
-	Novice::ScreenPrintf(0, 620, "%d", attackMode_);
 }
 
 
@@ -143,6 +151,9 @@ void Enemy::AttackInit() {
 	assaultCount_ = 0;
 	assault_.easingTime = 0;
 	assault_.easingCollTime = 0;
+	savePos_ = startPos_;
+	assaultPos_ = startPos_;
+	assault_.isEasing = false;
 }
 
 void Enemy::Shot(Vector2 pos) {
@@ -170,11 +181,7 @@ void Enemy::Shot(Vector2 pos) {
 		}
 	}
 
-	//全て弾が画面外に行ったら
-	/*if (bullet_[9]->GetIsShotEnd() == true) {
-			isAttackModeChange_ = true;
-
-		}*/
+	
 	for (int i = 0; i < EnemyBulletMax; i++) {
 		if (bullet_[i]->GetIsShotEnd() == false) {
 			isAttackModeChange_ = false;
@@ -203,8 +210,8 @@ void Enemy::Assault(Vector2 pos) {
 		//突進イージング
 		if (assault_.isEasing == true && assault_.easingCollTime <= 0) {
 			assault_.easingTime++;
-			worldPos_.x = easeInQuart(assault_.easingTime / assaultMaxFlame_, savePos_.x, assaultPos_.x);
-			worldPos_.y = easeInQuart(assault_.easingTime / assaultMaxFlame_, savePos_.y, assaultPos_.y);
+			worldPos_.x = easeOutCirc(assault_.easingTime / assaultMaxFlame_, savePos_.x, assaultPos_.x);
+			worldPos_.y = easeOutCirc(assault_.easingTime / assaultMaxFlame_, savePos_.y, assaultPos_.y);
 
 			//MAXフレームに到達したらフラグを降ろす
 			if (assault_.easingTime >= assaultMaxFlame_) {
@@ -266,6 +273,7 @@ void Enemy::Respone() {
 	//出現イージングフラグを立てる
 	if (isDeath_ == false && spone_.isEasing == false && isResporn_ == true) {
 		spone_.isEasing = true;
+		AttackInit();
 	}
 	//出現イージングフラグが立ったらスケールをイージング
 	if (spone_.isEasing == true) {

@@ -25,7 +25,7 @@ void PlayerBullet::Init() {
 }
 
 void PlayerBullet::Update() {
-
+	theta_++;
 	worldPos_.y -= velocity_.y;
 }
 
@@ -36,6 +36,6 @@ void PlayerBullet::RenderingPipeline() {
 
 void PlayerBullet::Draw() {
 
-	newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
+	newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, 0xffff00ff);
 
 }

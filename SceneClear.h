@@ -3,6 +3,11 @@
 #include"BaseScene.h"
 
 class  SceneClear :public BaseScene {
+
+
+
+
+
 public:
 
 	SceneClear();
